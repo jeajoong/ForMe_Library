@@ -1,4 +1,4 @@
-package library.first;
+package Java.library.first;
 
 // Solo 프로젝트 시작
 // 배운거 최대한 활용해서 재미나게 놀아보자
