@@ -1,9 +1,18 @@
+-- 읽은도서
+DROP TABLE IF EXISTS `MEB_RBOOK` RESTRICT;
+
+-- 도서
+DROP TABLE IF EXISTS `BOOK` RESTRICT;
+
+-- 회원
+DROP TABLE IF EXISTS `MEB` RESTRICT;
+
 -- 도서
 CREATE TABLE `BOOK` (
 	`book_no`     INTEGER     NOT NULL COMMENT '도서번호', -- 도서번호
 	`book_name`   VARCHAR(50) NOT NULL COMMENT '책이름', -- 책이름
 	`book_author` VARCHAR(50) NOT NULL COMMENT '작가이름', -- 작가이름
-	`book_price`  INTEGER     NOT NULL COMMENT '가격' -- 가격
+	`book_price`  INTEGER     NOT NULL DEFAULT 0 COMMENT '가격' -- 가격
 )
 COMMENT '도서';
 
@@ -13,6 +22,12 @@ ALTER TABLE `BOOK`
 		PRIMARY KEY (
 			`book_no` -- 도서번호
 		);
+
+ALTER TABLE `BOOK`
+	MODIFY COLUMN `book_no` INTEGER NOT NULL AUTO_INCREMENT COMMENT '도서번호';
+
+ALTER TABLE `BOOK`
+	AUTO_INCREMENT = 1;
 
 -- 읽은도서
 CREATE TABLE `MEB_RBOOK` (
@@ -43,6 +58,9 @@ ALTER TABLE `MEB`
 		PRIMARY KEY (
 			`meb_no` -- 회원번호
 		);
+
+ALTER TABLE `MEB`
+	MODIFY COLUMN `meb_no` INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
 
 -- 읽은도서
 ALTER TABLE `MEB_RBOOK`
