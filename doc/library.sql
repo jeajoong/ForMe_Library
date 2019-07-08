@@ -9,12 +9,11 @@ DROP TABLE IF EXISTS `MEB` RESTRICT;
 
 -- 도서
 CREATE TABLE `BOOK` (
-	`book_no`     INTEGER     NOT NULL COMMENT '도서번호', -- 도서번호
-	`book_name`   VARCHAR(50) NOT NULL COMMENT '책이름', -- 책이름
-	`book_author` VARCHAR(50) NOT NULL COMMENT '작가이름', -- 작가이름
-	`book_price`  INTEGER     NOT NULL DEFAULT 0 COMMENT '가격' -- 가격
-)
-COMMENT '도서';
+	`book_no`     INTEGER     NOT NULL, -- 도서번호
+	`book_name`   VARCHAR(50) NOT NULL, -- 책이름
+	`book_author` VARCHAR(50) NOT NULL, -- 작가이름
+	`book_price`  INTEGER     NOT NULL DEFAULT 0 -- 가격
+);
 
 -- 도서
 ALTER TABLE `BOOK`
@@ -24,17 +23,16 @@ ALTER TABLE `BOOK`
 		);
 
 ALTER TABLE `BOOK`
-	MODIFY COLUMN `book_no` INTEGER NOT NULL AUTO_INCREMENT COMMENT '도서번호';
+	MODIFY COLUMN `book_no` INTEGER NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `BOOK`
 	AUTO_INCREMENT = 1;
 
 -- 읽은도서
 CREATE TABLE `MEB_RBOOK` (
-	`meb_no`  INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-	`book_no` INTEGER NOT NULL COMMENT '도서번호' -- 도서번호
-)
-COMMENT '읽은도서';
+	`meb_no`  INTEGER NOT NULL, -- 회원번호
+	`book_no` INTEGER NOT NULL  -- 도서번호
+);
 
 -- 읽은도서
 ALTER TABLE `MEB_RBOOK`
@@ -46,11 +44,10 @@ ALTER TABLE `MEB_RBOOK`
 
 -- 회원
 CREATE TABLE `MEB` (
-	`meb_no` INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-	`meb_id` VARCHAR(20) NOT NULL COMMENT '아이디', -- 아이디
-	`meb_pw` VARCHAR(30) NOT NULL COMMENT '비밀번호' -- 비밀번호
-)
-COMMENT '회원';
+	`meb_no` INTEGER     NOT NULL, -- 회원번호
+	`meb_id` VARCHAR(20) NOT NULL, -- 아이디
+	`meb_pw` VARCHAR(30) NOT NULL  -- 비밀번호
+);
 
 -- 회원
 ALTER TABLE `MEB`
@@ -60,7 +57,7 @@ ALTER TABLE `MEB`
 		);
 
 ALTER TABLE `MEB`
-	MODIFY COLUMN `meb_no` INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
+	MODIFY COLUMN `meb_no` INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 읽은도서
 ALTER TABLE `MEB_RBOOK`

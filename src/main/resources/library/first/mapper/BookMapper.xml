@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="library.first.dao.BookDao">
+  
+  <resultMap type="book" id="bookMap">
+    <id column="book_no"  property="bookNo"/>
+    <result column="book_name"   property="bookName"/>
+    <result column="book_author"  property="bookAuthor"/>
+    <result column="book_price"  property="bookPrice"/>
+  </resultMap>
+  
+  
+  <sql id="select1">
+    select
+    book_no,
+    book_name,
+    book_author,
+    book_price
+    from
+    book
+  </sql>
+  
+    <select id="list" resultMap="bookMap">
+    <include refid="select1" />
+    order by
+    book_id desc
+  </select>
+  
+  <insert id="insert" parameterType="book"
+          useGeneratedKeys="true" keyColumn="book_id" keyProperty="no">
+    insert into book(
+      book_name,
+      book_author,
+      book_price) 
+    values(
+      #{bookName}, 
+      #{bookAuthor},
+      #{bookPrice})
+  </insert>
+  
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+

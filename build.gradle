@@ -7,10 +7,9 @@
  */
 
 plugins {
-    // Apply the java plugin to add support for Java
     id 'java'
-	id 'eclipse-wtp'
-	id 'war'
+    id 'eclipse-wtp'
+    id 'war'
 }
 
 repositories {
@@ -20,11 +19,43 @@ repositories {
 }
 
 dependencies { // 여기에 내가 앞으로 적용할 것들을 적는닷
+// servlet-api
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
 
-    // This dependency is found on compile classpath of this component and consumers.
-    implementation 'com.google.guava:guava:27.0.1-jre'
+    //mybatis persistence framework
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.5.0'
 
-    // Use JUnit test framework
+    // MariaDB JDBC Driver
+    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.0'
+    
+    // Spring WebMVC 
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.1.6.RELEASE'
+    
+    // Mybatis-Spring
+    compile group: 'org.mybatis', name: 'mybatis-spring', version: '2.0.0'
+    
+    // DataSource(DataBase Connection Pool : DBCP) 
+    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.6.0'
+    
+    // Spring JDBC
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.1.6.RELEASE'
+    
+    // AOP(AspectJ Weaver)
+    compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.2'
+    
+    // log4j 2.x
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
+    
+    // JSTL
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    
+    // JSON
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
+    
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    
+    implementation 'com.google.guava:guava:26.0-jre'
     testImplementation 'junit:junit:4.12'
 }
 
@@ -32,3 +63,5 @@ dependencies { // 여기에 내가 앞으로 적용할 것들을 적는닷
 // mainClassName = 'myLibrary.App'
 
 // 메인 클래스 이름 그레들 초기에 생기는데 이거 있으면 그레들 안됨
+
+
