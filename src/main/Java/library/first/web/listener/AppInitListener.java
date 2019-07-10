@@ -17,9 +17,14 @@ public class AppInitListener implements ServletContextListener {
     sc.setAttribute("contextRootPath", sc.getContextPath()); 
   }
 }
+// Listener로부터 상속받아 앱을 시작하고 ServletContextEvent의 객체를 받아
+// ServletContext의 객체에 담는다.
+// 그리고 이것을 앱 내부에서 활용하기 위해 setAttribute 한다.
 
+//ServletContext 객체에 ServletContextEvent
 
 // ServletContext 자체의 의미를 모른다면 단순히 서블릿 컨테이너와 통신하여 서블릿의 정보를 얻는다라는 결론 밖에 없다.
+
 
 // 'Java Servlet에 대해' , '※★서블릿 관련' => '잘모르는것들' 북마크 폴더 그림참조
 //
@@ -32,7 +37,7 @@ public class AppInitListener implements ServletContextListener {
 // - ServletConfig는 하나의 Servlet 초기화에 필요한 정보를 전달하기 위한 Config 객체.
 //    Servlet당 하나만 생성.
 //   
-// - ServletContext는 하나의 Java Virtual Machin.
+// - ServletContext는 하나의 Java Virtual Machin에 한 개 존재
 //    하나의 서블릿이 서블릿 컨테이너와 통신하기 위해서 사용되어지는 메소드들을 가지고 있다.
 //
 // - ServleteContextListener는
