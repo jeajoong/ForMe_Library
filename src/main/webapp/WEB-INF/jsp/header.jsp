@@ -80,25 +80,7 @@
   </div>
 
 
-  <jsp:include page="javascript.jsp" />
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-  <script>
-			$(document).ready(function() {
-				var catebar = $('#header-cate').offset();
-				$(window).scroll(function() {
-					if ($(document).scrollTop() > catebar.top) {
-						$('#header-cate').addClass('fixed');
-					} else {
-						$('#header-cate').removeClass('fixed');
-					}
-				});
-			});
-		</script>
-
-</body>
-<!-- <footer>
-        
-  </footer> -->
 
 </html>

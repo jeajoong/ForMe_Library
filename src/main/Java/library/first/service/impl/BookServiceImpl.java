@@ -4,16 +4,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import library.first.dao.BookDao;
 import library.first.domain.Book;
 import library.first.service.BookService;
 
 @Service
 public class BookServiceImpl implements BookService{
 
-  BookService bookService;
+  BookDao bookDao;
 
-  public BookServiceImpl(BookService bookService) {
-  this.bookService = bookService;
+  public BookServiceImpl(BookDao bookDao) {
+  this.bookDao = bookDao;
   }
   
   

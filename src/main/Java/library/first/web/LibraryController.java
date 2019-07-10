@@ -23,14 +23,23 @@ public class LibraryController {
   
   @Autowired BookService bookService;
   
+  
   @GetMapping
   public String list(Model model) {
 
     List<Book> books = bookService.list();
     model.addAttribute("list", books);
 
-    return "list";
+    return "library/list";
   }
+
   
+  @GetMapping("/add")
+  public int insert(Book book) {
+  
+      
+    return 0;
+      
+  }
   
 }
