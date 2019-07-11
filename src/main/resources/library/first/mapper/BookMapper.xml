@@ -31,7 +31,7 @@
   </select>
   
   <insert id="insert" parameterType="book"
-          useGeneratedKeys="true" keyColumn="book_id" keyProperty="no">
+          useGeneratedKeys="true" keyColumn="book_id" keyProperty="bookNo">
     insert into book(
       book_name,
       book_author,

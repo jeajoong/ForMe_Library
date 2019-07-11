@@ -15,7 +15,7 @@ import com.eomcs.lms.domain.Announce;
 import library.first.domain.Book;
 import library.first.service.BookService;
 
-@Controller
+@Controller  // http://localhost:8080/myLibrary/app/library
 @RequestMapping("/library")
 public class LibraryController {
 
