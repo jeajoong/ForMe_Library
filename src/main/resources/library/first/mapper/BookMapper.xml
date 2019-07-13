@@ -24,10 +24,8 @@
     book
   </sql>
   
-    <select id="list" resultMap="bookMap">
+  <select id="list" resultMap="bookMap">
     <include refid="select1" />
-    order by
-    book_id desc
   </select>
   
   <insert id="insert" parameterType="book"

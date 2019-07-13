@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.eomcs.lms.domain.Announce;
-
 import library.first.domain.Book;
 import library.first.service.BookService;
 
@@ -28,13 +26,15 @@ public class LibraryController {
   public String list(Model model) {
 
     List<Book> books = bookService.list();
+      System.out.println(books);
+    
     model.addAttribute("list", books);
 
     return "library/list";
   }
 
   
-  // 커밋유저이름 확인용커밋2
+  
   
   @GetMapping("/add")
   public int insert(Book book) {

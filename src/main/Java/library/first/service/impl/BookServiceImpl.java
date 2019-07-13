@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService{
 
   @Override
   public List<Book> list() {
-    return null;
+    return bookDao.list();
 }
 
 
