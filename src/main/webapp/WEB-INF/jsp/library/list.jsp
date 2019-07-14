@@ -8,6 +8,7 @@
 
 <link href="${contextRootPath}/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${contextRootPath}/css/library_interior.css" rel="stylesheet"/>
+<link href="${contextRootPath}/jquery-ui-1.12.1.datepicker2/jquery-ui.css" rel="stylesheet"/> 
 </head>
 <body>
 
@@ -37,7 +38,25 @@
         </select>
         </td>
         
+        <td scope="row" id="datepick">
+          <div class="md-form">
+            <input autocomplete=off class="form-control-sm" type="text" id="datepicker">
+              <button type="button" class="btn btn-dark" id="name-clear-btn3">초기화</button>
+          </div>
+          
+          <div style="display: none;">
+           <input data-jplist-control="textbox-filter" data-group="group1"
+              data-name="my-filter-1" data-path=".Date"
+              id="textbox-filter" name="readDate" type="text" value=""
+              data-clear-btn-id="name-clear-btn3"/>
+          </div>
+        
+        </td>
+        <td>
+        <button type="button" class="btn btn-primary" id="regi">등록하기</button>
+        </td>
         </tr>
+        
         </tbody>
 </table>
 
@@ -66,5 +85,41 @@
 
 
 </div>
+<script src="${contextRootPath}/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="${contextRootPath}/jquery-ui-1.12.1.datepicker2/jquery-ui.min.js"></script>
+
+<script>
+             $("#datepicker").on("keyup", function() {
+                var value = $(this).val().toLowerCase(); 
+                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+              });
+
+             $(function() {
+             
+             $( "#datepicker" ).datepicker({
+                 
+                 onSelect: function(value, props) {
+                        var tb = document.getElementById('textbox-filter');
+                        tb.value = value;
+                        let keyupEvent = new Event('keyup');
+                        tb.dispatchEvent(keyupEvent);
+                      },
+                      defaultDate: +7,
+                      dateFormat: 'yy-mm-dd',
+                      buttonText: "선택",
+                      showMonthAfterYear:true,
+                      yearSuffix: "년",
+                      buttonImageOnly: true,
+                      dayNamesMin: ['일','월','화','수','목','금','토'],
+                      monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                      buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif"
+              });
+             
+             $('#name-clear-btn3').click(function() {
+                 $('#datepicker').val('');
+               });
+             
+             });
+</script>
 </body>
 </html>
