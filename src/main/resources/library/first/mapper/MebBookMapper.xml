@@ -30,27 +30,45 @@
   
   <sql id="select1">
     select
-    meb_no,
-    book_no,
-    read_date
+     r.meb_no,
+     r.book_no,
+     read_date
     from
-    MEB_RBOOK
+     MEB_RBOOK r
+     left outer join member m on r.meb_no = m.meb_no
+     left outer join book b on r.book_no = b.book_no
   </sql>
   
   
-  <insert id="insert" parameterType="member"
+  <!-- 책 추가(읽은 책) -->
+  <insert id="insert" parameterType="book"
           useGeneratedKeys="true" keyColumn="meb_no" keyProperty="no">
-    insert into member(
-      meb_id,
-      meb_pw)
+    insert into MEB_RBOOK(
+      meb_no,
+      book_no,
+      read_date)
     values(
-      #{id},
-      #{pw}
+      #{no},
+      #{bookNo},
+      #{readDate}
   </insert>
   
   
-  <!-- 책 추가(읽은 책) -->
   <!-- 책 삭제(읽은 책) -->
+  <!-- 책 한개를 삭제해야 하니까 책번호로 삭제함. -->
+  <delete id="remove" parameterType="int">
+    delete from MEB_RBOOK
+    where book_no = #{bookNo}
+  </delete>
+  
+  <!-- 읽은 날짜 수정 --> <!-- 책 데이터는 수정할수 없게. -->
+  <update id="update" parameterType="book">
+    update MEB_RBOOK
+      set
+       read_date = #{readDate}
+      where
+       book_no = #{no}
+  </update>
   
 </mapper>
 

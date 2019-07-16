@@ -25,28 +25,30 @@
   
   <sql id="select1">
     select
-    meb_no,
-    meb_id
+     meb_no,
+     meb_id,
+     meb_pw
     from
-    member
+     member
   </sql>
   
   <!-- 회원가입 할때. -->
-  <insert id="insert" parameterType="member"
+  <insert id="join" parameterType="member"
           useGeneratedKeys="true" keyColumn="meb_no" keyProperty="no">
     insert into member(
       meb_id,
       meb_pw)
     values(
       #{id},
-      #{pw}
+      password(#{pw})
   </insert>
   
-  <!-- 회원탈퇴할때. -->
-  
-  <!-- 책 추가(읽은 책) -->
-  <!-- 책 삭제(읽은 책) -->
-  
+  <!-- 회원탈퇴 할때. -->
+  <delete id="ban" parameterType="int">
+    delete from member
+    where meb_no = #{no}
+  </delete>
+
 </mapper>
 
 
