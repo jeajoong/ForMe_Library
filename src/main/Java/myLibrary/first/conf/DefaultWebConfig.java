@@ -1,4 +1,4 @@
-package library.first.conf;
+package myLibrary.first.conf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

@@ -93,9 +93,17 @@
                 var value = $(this).val().toLowerCase(); 
                   $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
               });
-
-             $(function() {
              
+             var swalWithBootstrapButtons = Swal.mixin({
+                 customClass: {
+                   confirmButton: 'btn btn-success btn-sss',
+                   cancelButton: 'btn btn-danger btn-fff'
+                 },
+                 buttonsStyling: false,
+               })
+
+               
+             $(function() {
              $( "#datepicker" ).datepicker({
                  
                  onSelect: function(value, props) {
@@ -120,6 +128,53 @@
                });
              
              });
+             
+             
+             // 책 데이터를 넣을 때.
+             
+             
+             
+             $('#regi').on('click', function(){ // 책데이터 -> 유저의 읽은 책 목록으로 요청할때.
+            
+            var choiceBook = $("#selectBox option:selected").val();
+            console.log(choiceBook);
+            
+                 $.ajax({
+                     type:"POST",
+                     url:'library/insert/' + choiceBook,
+                     contentType: 'application/json',
+                     dataType: "text",
+                     data:JSON.stringify({
+                     }),
+                     success : function(data) {
+                       console.log(data)
+                       if (data == 1) {
+                     	  swalWithBootstrapButtons.fire({
+                              title: "추가완료!",
+                              type: 'success'
+                          }).then((result) => {
+                              if (result.value) {
+                                location.href="library";
+                                return false;
+                              }
+                          })
+                      }
+                       },
+                     error : function(data) {
+                     	swalWithBootstrapButtons.fire({
+                          title: "이미 추가한 책 입니다.",
+                          type: 'error'
+                      }).then((result) => {
+                          if (result.value) {
+                            return false;
+                          }
+                      })
+                       }
+                     })
+             
+               });
+             
+             
 </script>
 </body>
 </html>

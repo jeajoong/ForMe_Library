@@ -1,8 +1,8 @@
-package library.first.service;
+package myLibrary.first.service;
 
 import java.util.List;
 
-import library.first.domain.Book;
+import myLibrary.first.domain.Book;
 
 public interface BookService {
   int insert(Book book);

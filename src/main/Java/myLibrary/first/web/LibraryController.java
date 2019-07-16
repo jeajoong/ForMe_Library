@@ -1,17 +1,21 @@
-package library.first.web;
+package myLibrary.first.web;
 
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import library.first.domain.Book;
-import library.first.service.BookService;
+import myLibrary.first.domain.Book;
+import myLibrary.first.service.BookService;
 
 @Controller  // http://localhost:8080/myLibrary/app/library
 @RequestMapping("/library")
@@ -35,7 +39,7 @@ public class LibraryController {
 
   
   
-  
+  //책 정보를 추가하는 용.
   @GetMapping("/add")
   public int insert(Book book) {
   
@@ -43,5 +47,30 @@ public class LibraryController {
     return 0;
       
   }
+  
+  
+  // 이건 책 데이터를 유저의 읽은 책 데이터로 넣을 떄.
+  @RequestMapping(value = "insert/{no}", method = {RequestMethod.GET, RequestMethod.POST})
+  @ResponseBody
+  public String submit(@PathVariable int no) throws ParseException {
+
+    logger.debug("ajax.R.bookNo/" + no);
+
+
+    return "1"; // 성공적일때.
+  }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
 }

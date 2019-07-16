@@ -1,5 +1,5 @@
 
-set character_set_client = euckr;
+--set character_set_client = euckr; 할필요 없다.
 
 insert into BOOK(book_name, book_author, book_price)
 values('살인 현장은 구름 위', '히가시노 게이고', 13500);

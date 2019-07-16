@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mylibrary.first.dao.MemberDao">
+  
+  <resultMap type="member" id="memberMap">
+    <id column="meb_no"  property="no"/>
+    <result column="meb_id"   property="id"/>
+    <result column="meb_pw"  property="pw"/>
+    
+  <collection property="book" ofType="Book">
+    <id column="book_no"  property="bookNo"/>
+    <result column="book_name"   property="bookName"/>
+    <result column="book_author"  property="bookAuthor"/>
+    <result column="book_price"  property="bookPrice"/>
+  </collection>
+  
+  </resultMap>
+  
+  <!-- 회원이 책정보를 가지고 있어야하니까 member 매퍼에 join -->
+  
+  
+  <sql id="select1">
+    select
+    meb_no,
+    meb_id
+    from
+    member
+  </sql>
+  
+  <!-- 회원가입 할때. -->
+  <insert id="insert" parameterType="member"
+          useGeneratedKeys="true" keyColumn="meb_no" keyProperty="no">
+    insert into member(
+      meb_id,
+      meb_pw)
+    values(
+      #{id},
+      #{pw}
+  </insert>
+  
+  <!-- 회원탈퇴할때. -->
+  
+  <!-- 책 추가(읽은 책) -->
+  <!-- 책 삭제(읽은 책) -->
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+

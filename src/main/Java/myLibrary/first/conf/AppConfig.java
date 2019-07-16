@@ -1,4 +1,4 @@
-package library.first.conf;
+package myLibrary.first.conf;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

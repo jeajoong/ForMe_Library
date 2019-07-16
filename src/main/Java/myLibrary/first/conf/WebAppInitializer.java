@@ -1,4 +1,4 @@
-package library.first.conf;
+package myLibrary.first.conf;
 
 import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;

@@ -1,4 +1,4 @@
-package library.first.domain;
+package myLibrary.first.domain;
 
 import java.io.Serializable;
 

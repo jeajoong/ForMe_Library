@@ -1,4 +1,4 @@
-package library.first.conf;
+package myLibrary.first.conf;
 
 import javax.sql.DataSource;
 
