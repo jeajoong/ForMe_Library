@@ -9,7 +9,7 @@
     <Root level="info">
       <AppenderRef ref="Console"/>
     </Root>
-    <logger name="library.first" level="DEBUG" additivity="false">
+    <logger name="myLibrary.first" level="DEBUG" additivity="false">
       <AppenderRef ref="Console"/>
     </logger>
   </Loggers>

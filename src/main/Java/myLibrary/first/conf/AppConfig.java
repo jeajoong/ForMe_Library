@@ -12,22 +12,22 @@ import org.springframework.context.annotation.ImportResource;
 
 // 이 애노테이션 설정은 application-context.xml의 다음 설정과 같다.
 /*
-  <context:component-scan base-package="com.eomcs.lms">
-    <context:exclude-filter type="regex" expression="library.first.web.*"/>
+  <context:component-scan base-package="myLibrary.first">
+    <context:exclude-filter type="regex" expression="myLibrary.first.web.*"/>
   </context:component-scan>
  */
 @ComponentScan(
-    basePackages="library.first",
+    basePackages="myLibrary.first",
     excludeFilters= @Filter(
         type = FilterType.REGEX,
-        pattern = "library.first"
+        pattern = "myLibrary.first"
     ))
 
 // 트랜잭션을 설정한 파일을 로딩한다.
 // => Spring IoC 컨테이너는 @ImportResource 애노테이션에 지정된 설정 파일에 따라 객체를 준비한다.
 // => 이 애노테이션은 application-context-tx.xml 설정을 대체한다.
 //
-@ImportResource("classpath:/library/first/conf/tx-context.xml")
+@ImportResource("classpath:/myLibrary/first/conf/tx-context.xml")
 public class AppConfig {
 
   final static Logger logger = LogManager.getLogger(AppConfig.class);

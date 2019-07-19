@@ -4,6 +4,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-//import com.eomcs.lms.domain.Member;
-//import com.eomcs.lms.service.MemberService;
+
+import myLibrary.first.domain.Member;
+import myLibrary.first.service.MemberService;
 
 @Controller
 @RequestMapping("/auth")
@@ -23,7 +25,7 @@ public class AuthController {
   
   static final String REFERER_URL = "refererUrl";
 
-//  @Autowired MemberService memberService;
+  @Autowired MemberService memberService;
   @Autowired ServletContext servletContext;
   
   @GetMapping("form")
@@ -42,30 +44,30 @@ public class AuthController {
   
   @PostMapping("login")
   public String login(
-      String email,
+      String id,
       String password,
-      String saveEmail,
+      String saveId,
       HttpSession session,
       HttpServletResponse response) {
 
     Cookie cookie;
-    if (saveEmail != null) {
-      cookie = new Cookie("email", email);
+    if (saveId != null) {
+      cookie = new Cookie("id", id);
       cookie.setMaxAge(60 * 60 * 24 * 15); // 15일간 쿠키를 보관한다.
       
     } else {
-      cookie = new Cookie("email", "");
+      cookie = new Cookie("id", "");
       cookie.setMaxAge(0); // 기존의 쿠키를 제거한다.
     }
     response.addCookie(cookie); 
 
-//    Member member = memberService.get(email, password); member가 아직 없다, service또한..
-//
-//    if (member == null) {
-//      return "auth/fail";
-//    }
-//
-//    session.setAttribute("loginUser", member);
+    Member member = memberService.get(id, password);
+
+    if (member == null) {
+      return "auth/fail";
+    }
+
+    session.setAttribute("loginUser", member);
 
     String refererUrl = (String) session.getAttribute(REFERER_URL);
     

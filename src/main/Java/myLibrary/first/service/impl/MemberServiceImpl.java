@@ -1,5 +1,7 @@
 package myLibrary.first.service.impl;
 
+import java.util.HashMap;
+
 import org.springframework.stereotype.Service;
 
 import myLibrary.first.dao.MemberDao;
@@ -21,6 +23,15 @@ public class MemberServiceImpl implements MemberService{
     return 0;
 }
 
+  @Override
+  public Member get(String id, String password) {
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("id", id);
+    paramMap.put("password", password);
+    
+    return memberDao.findByIdPassword(paramMap);
+  }
+  
 
   @Override
   public int ban(int no) {

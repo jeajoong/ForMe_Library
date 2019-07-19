@@ -4,7 +4,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="mylibrary.first.dao.BookDao">
+<mapper namespace="myLibrary.first.dao.BookDao">
   
   <resultMap type="book" id="bookMap">
     <id column="book_no"  property="bookNo"/>
@@ -12,12 +12,6 @@
     <result column="book_author"  property="bookAuthor"/>
     <result column="book_price"  property="bookPrice"/>
     
-  <collection property="member" ofType="Member">
-    <id column="meb_no"  property="no"/>
-    <result column="meb_id"   property="id"/>
-    <result column="meb_pw"  property="pw"/>
-  </collection>
-  
   </resultMap>
   
   

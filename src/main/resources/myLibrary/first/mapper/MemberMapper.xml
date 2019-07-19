@@ -4,19 +4,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="mylibrary.first.dao.MemberDao">
+<mapper namespace="myLibrary.first.dao.MemberDao">
   
   <resultMap type="member" id="memberMap">
     <id column="meb_no"  property="no"/>
     <result column="meb_id"   property="id"/>
     <result column="meb_pw"  property="pw"/>
-    
-  <collection property="book" ofType="Book">
-    <id column="book_no"  property="bookNo"/>
-    <result column="book_name"   property="bookName"/>
-    <result column="book_author"  property="bookAuthor"/>
-    <result column="book_price"  property="bookPrice"/>
-  </collection>
   
   </resultMap>
   
@@ -42,6 +35,18 @@
       #{id},
       password(#{pw})
   </insert>
+  
+  <select id="findByIdPassword" resultMap="memberMap" parameterType="map">
+    select
+      meb_id,
+      meb_pw
+    from
+      member
+    where
+      meb_id = #{id}
+      and meb_pw = password(#{pw})
+  </select>
+  
   
   <!-- 회원탈퇴 할때. -->
   <delete id="ban" parameterType="int">

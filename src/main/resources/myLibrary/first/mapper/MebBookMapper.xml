@@ -4,7 +4,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="mylibrary.first.dao.MebBookDao">
+<mapper namespace="myLibrary.first.dao.MebBookDao">
   
   <resultMap type="mebBook" id="mebBookMap">
     <id column="meb_no"  property="no"/>

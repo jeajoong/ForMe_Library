@@ -1,6 +1,4 @@
 
---set character_set_client = euckr; 할필요 없다.
-
 -- 책 데이터
 insert into BOOK(book_name, book_author, book_price)
 values('살인 현장은 구름 위', '히가시노 게이고', 13500);
@@ -57,9 +55,9 @@ values("호밀밭의 파수꾼", '제롬 데이비드 샐린저', 10000);
 
 
 --유저 데이터
-insert into MEB(meb_no, meb_id, meb_pw) values (1, 'test', 'test');
-insert into MEB(meb_no, meb_id, meb_pw) values (2, 'bot1', 'bot1');
-insert into MEB(meb_no, meb_id, meb_pw) values (3, 'bot2', 'bot2');
+insert into MEMBER(meb_no, meb_id, meb_pw) values (1, 'test', 'test');
+insert into MEMBER(meb_no, meb_id, meb_pw) values (2, 'bot1', 'bot1');
+insert into MEMBER(meb_no, meb_id, meb_pw) values (3, 'bot2', 'bot2');
 
 
 -- 읽은 책 데이터
