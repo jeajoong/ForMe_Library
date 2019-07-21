@@ -8,9 +8,14 @@
 
 <link href="${contextRootPath}/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="${contextRootPath}/css/library_interior.css" rel="stylesheet"/>
+
+<link href="${contextRootPath}/node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 <link href="${contextRootPath}/jquery-ui-1.12.1.datepicker2/jquery-ui.css" rel="stylesheet"/> 
 </head>
+
 <body>
+
+<jsp:include page="../header.jsp"/>
 
   <div id="roof">
     <h1 style="text-align:center">도서관리 시스템</h1>
@@ -40,7 +45,7 @@
         
         <td scope="row" id="datepick">
           <div class="md-form">
-            <input autocomplete=off class="form-control-sm" type="text" id="datepicker">
+            <input autocomplete=off class="form-control-sm" type="text" id="datepicker" readonly>
               <button type="button" class="btn btn-dark" id="name-clear-btn3">초기화</button>
           </div>
           
@@ -53,7 +58,7 @@
         
         </td>
         <td>
-        <button type="button" class="btn btn-primary" id="regi">등록하기</button>
+        <button type="Button" class="btn btn-primary" id="regi">등록하기</button>
         </td>
         </tr>
         
@@ -86,8 +91,10 @@
 
 </div>
 <script src="${contextRootPath}/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="${contextRootPath}/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
 <script src="${contextRootPath}/jquery-ui-1.12.1.datepicker2/jquery-ui.min.js"></script>
-
+<script src="${contextRootPath}/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script>
              $("#datepicker").on("keyup", function() {
                 var value = $(this).val().toLowerCase(); 
@@ -130,21 +137,44 @@
              });
              
              
-             // 책 데이터를 넣을 때.
-             
-             
-             
-             $('#regi').on('click', function(){ // 책데이터 -> 유저의 읽은 책 목록으로 요청할때.
+             $('#regi').on('click', function(){ // 읽은 책 목록으로 요청할때.
             
             var choiceBook = $("#selectBox option:selected").val();
-            console.log(choiceBook);
+            var inputDate = $("#datepicker").val();
             
+            if (choiceBook == "") {
+           	 swalWithBootstrapButtons.fire({
+     	            title: "책을 선택해주세요!",
+     	            type: 'info'
+     	        }).then((result) => {
+     	            if (result.value) {
+     	              return false;
+     	            }
+     	        })
+           	    return false;
+             }
+            if (inputDate == "") {
+              	 swalWithBootstrapButtons.fire({
+        	            title: "날짜를 선택해 주세요!",
+        	            type: 'info'
+        	        }).then((result) => {
+        	            if (result.value) {
+        	              return false;
+        	            }
+        	        })
+              	    return false;
+                }
+            
+            console.log(choiceBook);
+            console.log(inputDate);
+            inputDate;
                  $.ajax({
                      type:"POST",
                      url:'library/insert/' + choiceBook,
                      contentType: 'application/json',
                      dataType: "text",
                      data:JSON.stringify({
+                    	 readDate: inputDate
                      }),
                      success : function(data) {
                        console.log(data)

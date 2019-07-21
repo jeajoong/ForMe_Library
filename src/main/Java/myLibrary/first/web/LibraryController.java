@@ -1,6 +1,9 @@
 package myLibrary.first.web;
 
+import java.sql.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -49,13 +52,14 @@ public class LibraryController {
   }
   
   
-  // 이건 책 데이터를 유저의 읽은 책 데이터로 넣을 떄.
+  // 읽은 책 데이터 넣을 때
   @RequestMapping(value = "insert/{no}", method = {RequestMethod.GET, RequestMethod.POST})
   @ResponseBody
-  public String submit(@PathVariable int no) throws ParseException {
+  public String submit(@PathVariable int no, @PathVariable Date readDate, HttpSession session) throws ParseException {
 
     logger.debug("ajax.R.bookNo/" + no);
-
+    session.getAttribute("loginUser");
+    
 
     return "1"; // 성공적일때.
   }

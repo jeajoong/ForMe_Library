@@ -10,19 +10,18 @@
 <h1>로그인</h1>
 <form action='login' method='post'>
   <div class="form-group">
-    <label for="email">이메일</label>
-    <input type="email" class="form-control" id="email" name="email"
-           value='${cookie.email.value}'
-           aria-describedby="emailHelp" placeholder="이메일을 입력하세요.">
-    <small id="emailHelp" class="form-text text-muted">당신의 이메일을 다른 사이트와 결코 공유하지 않습니다.</small>
+    <label for="id">ID</label>
+    <input type="text" class="form-control" id="id" name="id"
+           value='${cookie.id.value}'
+           aria-describedby="emailHelp" placeholder="아이디를 입력하세요.">
   </div>
   <div class="form-group">
-    <label for="password">암호</label>
+    <label for="password">Password</label>
     <input type="password" class="form-control" id="password" name="password" placeholder="암호를 입력하세요.">
   </div>
   <div class="form-group form-check">
     <input type="checkbox" class="form-check-input" id="saveEmail" name="saveEmail">
-    <label class="form-check-label" for="saveEmail">이메일 저장</label>
+    <label class="form-check-label" for="saveEmail">아이디 저장</label>
   </div>
   <button class="btn btn-primary">로그인</button>
 </form>
