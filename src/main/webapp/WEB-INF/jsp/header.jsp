@@ -19,6 +19,7 @@
       <c:if test="${empty loginUser}">
         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">로그인</button>
       </c:if>
+      <!-- 로그인 버튼을 누르면 모달창이 안나옴...  -->
       
       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" 
            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
