@@ -24,10 +24,10 @@ public class MemberServiceImpl implements MemberService{
 }
 
   @Override
-  public Member get(String id, String password) {
+  public Member get(String id, String pw) {
     HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("id", id);
-    paramMap.put("password", password);
+    paramMap.put("pw", pw);
     
     return memberDao.findByIdPassword(paramMap);
   }

@@ -119,7 +119,7 @@
                         let keyupEvent = new Event('keyup');
                         tb.dispatchEvent(keyupEvent);
                       },
-                      defaultDate: +7,
+                      defaultDate: -1,
                       dateFormat: 'yy-mm-dd',
                       buttonText: "선택",
                       showMonthAfterYear:true,

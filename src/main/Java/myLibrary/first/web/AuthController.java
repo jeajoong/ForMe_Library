@@ -45,11 +45,15 @@ public class AuthController {
   @PostMapping("login")
   public String login(
       String id,
-      String password,
+      String pw,
       String saveId,
       HttpSession session,
       HttpServletResponse response) {
 
+    logger.debug(id);
+    logger.debug(pw);
+    logger.debug(saveId);
+    
     Cookie cookie;
     if (saveId != null) {
       cookie = new Cookie("id", id);
@@ -61,7 +65,7 @@ public class AuthController {
     }
     response.addCookie(cookie); 
 
-    Member member = memberService.get(id, password);
+    Member member = memberService.get(id, pw);
 
     if (member == null) {
       return "auth/fail";
@@ -74,7 +78,7 @@ public class AuthController {
     logger.debug("refererUrl: " + refererUrl);
     
     if (refererUrl == null) {      
-      return "redirect:/"; // 웹 애플리케이션 루트(컨텍스트 루트)를 의미한다.
+      return "redirect:.."; // 웹 애플리케이션 루트(컨텍스트 루트)를 의미한다.
       
     } else {
       return "redirect:" + refererUrl;
@@ -88,7 +92,7 @@ public class AuthController {
     logger.debug("loginUser: " + session.getAttribute("loginUser"));
     session.invalidate();
     
-    return "redirect:/";
+    return "redirect:../library";
   }
 }
 

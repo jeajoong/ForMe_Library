@@ -49,7 +49,7 @@ ALTER TABLE MEB_RBOOK
 CREATE TABLE MEMBER (
 	meb_no INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
 	meb_id VARCHAR(20) NOT NULL COMMENT '아이디', -- 아이디
-	meb_pw VARCHAR(30) NOT NULL COMMENT '비밀번호' -- 비밀번호
+	meb_pw VARCHAR(50) NOT NULL COMMENT '비밀번호' -- 비밀번호
 )
 COMMENT '회원';
 

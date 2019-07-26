@@ -55,9 +55,9 @@ values("호밀밭의 파수꾼", '제롬 데이비드 샐린저', 10000);
 
 
 --유저 데이터
-insert into MEMBER(meb_no, meb_id, meb_pw) values (1, 'test', 'test');
-insert into MEMBER(meb_no, meb_id, meb_pw) values (2, 'bot1', 'bot1');
-insert into MEMBER(meb_no, meb_id, meb_pw) values (3, 'bot2', 'bot2');
+insert into MEMBER(meb_no, meb_id, meb_pw) values (1, 'test', password('t'));
+insert into MEMBER(meb_no, meb_id, meb_pw) values (2, 'bot1', password('1'));
+insert into MEMBER(meb_no, meb_id, meb_pw) values (3, 'bot2', password('2'));
 
 
 -- 읽은 책 데이터

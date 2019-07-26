@@ -33,9 +33,10 @@
       meb_pw)
     values(
       #{id},
-      password(#{pw})
-  </insert>
+      password(#{pw}) ) 
+  </insert><!-- 바깥 괄호를 안쓰다니... -->
   
+  <!-- 로그인할때.  -->
   <select id="findByIdPassword" resultMap="memberMap" parameterType="map">
     select
       meb_id,

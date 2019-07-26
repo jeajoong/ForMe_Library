@@ -17,7 +17,8 @@
     
     <div id="bit-login-state">
       <c:if test="${empty loginUser}">
-        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">로그인</button>
+        <a class="btn btn-success btn-sm" href='${contextRootPath}/app/auth/form' >로그인</a> 
+        <!-- data-toggle="modal" data-target="#exampleModal" -->
       </c:if>
       <!-- 로그인 버튼을 누르면 모달창이 안나옴...  -->
       
@@ -45,7 +46,7 @@
                   <input type="password" class="form-control" id="password" name="password" placeholder="암호를 입력하세요.">
                 </div>
                 <div class="form-group form-check">
-                  <input type="checkbox" class="form-check-input" id="saveEmail" name="saveEmail">
+                  <input type="checkbox" class="form-check-input" id="saveId" name="saveId">
                   <label class="form-check-label" for="saveEmail">아이디 저장</label>
                 </div>
                 <button class="btn btn-primary">로그인</button>
@@ -63,7 +64,7 @@
             </div>
       
       <c:if test="${not empty loginUser}">
-        ${loginUser.ids}
+        ${loginUser.id}
         <a class="btn btn-dark btn-sm" href='${contextRootPath}/app/auth/logout'>로그아웃</a> 
       </c:if>
     </div>
