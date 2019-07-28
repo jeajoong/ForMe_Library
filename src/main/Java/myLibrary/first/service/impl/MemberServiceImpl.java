@@ -20,7 +20,7 @@ public class MemberServiceImpl implements MemberService{
   
   @Override
   public int join(Member member) {
-    return 0;
+    return memberDao.join(member);
 }
 
   @Override

@@ -13,7 +13,7 @@
     <label for="id">ID</label>
     <input type="text" class="form-control" id="id" name="id"
            value='${cookie.id.value}'
-           aria-describedby="emailHelp" placeholder="아이디를 입력하세요.">
+           aria-describedby="idHelp" placeholder="아이디를 입력하세요.">
   </div>
   <div class="form-group">
     <label for="password">Password</label>

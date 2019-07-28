@@ -42,6 +42,24 @@ public class AuthController {
     }
   }
   
+  @GetMapping("joinform")
+  public String joinForm(
+      @RequestHeader(value="Referer",required=false) String refererUrl,
+      HttpSession session) {
+    
+    return "auth/joinform";
+  }
+  
+  
+  @PostMapping("join")
+  public String join(Member member, HttpSession session) {
+    
+    System.out.println(member.getId() + "회원 회원가입");
+    memberService.join(member);
+    
+    return "redirect:../library";
+  }
+  
   @PostMapping("login")
   public String login(
       String id,

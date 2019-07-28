@@ -15,6 +15,13 @@
     <ul class="navbar-nav mr-auto">
     </ul>
     
+    
+    <div id="bit-join-state">
+      <c:if test="${empty loginUser}">
+        <a class="btn btn-success btn-sm" href='${contextRootPath}/app/auth/joinform'>회원가입</a> 
+      </c:if>
+    </div>
+    
     <div id="bit-login-state">
       <c:if test="${empty loginUser}">
         <a class="btn btn-success btn-sm" href='${contextRootPath}/app/auth/form' >로그인</a> 
