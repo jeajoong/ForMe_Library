@@ -5,22 +5,12 @@ import java.io.Serializable;
 public class Member implements Cloneable, Serializable {
   private static final long serialVersionUID = 1L;
   
-  private int no;
   private String id;
   private String pw;
   
-  
   @Override
   public String toString() {
-    return "Member [no=" + no + ", id=" + id + ", pw=" + pw + "]";
-  }
-
-  public int getNo() {
-    return no;
-  }
-
-  public void setNo(int no) {
-    this.no = no;
+    return "Member [id=" + id + ", pw=" + pw + "]";
   }
 
   public String getId() {

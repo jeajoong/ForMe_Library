@@ -189,16 +189,6 @@
                               }
                           })
                       }
-                       },
-                     error : function(data) {
-                     	swalWithBootstrapButtons.fire({
-                          title: "이미 추가한 책 입니다.",
-                          type: 'error'
-                      }).then((result) => {
-                          if (result.value) {
-                            return false;
-                          }
-                      })
                        }
                      })
              

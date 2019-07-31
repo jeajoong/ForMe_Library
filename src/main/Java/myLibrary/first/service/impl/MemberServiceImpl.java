@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService{
   
 
   @Override
-  public int ban(int no) {
+  public int ban(String id) {
     return 0;
 }
 

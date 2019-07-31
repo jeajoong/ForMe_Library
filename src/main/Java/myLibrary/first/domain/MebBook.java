@@ -8,24 +8,26 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class MebBook implements Cloneable, Serializable {
   private static final long serialVersionUID = 1L;
   
-  private int no;
+  private String id;
   private int bookNo;
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date readDate;
   
+  
   @Override
   public String toString() {
-    return "MebBook [no=" + no + ", bookNo=" + bookNo + ", readDate=" + readDate + "]";
+    return "MebBook [id=" + id + ", bookNo=" + bookNo + ", readDate=" + readDate + "]";
   }
 
-  public int getNo() {
-    return no;
+  
+  public String getId() {
+    return id;
   }
   
-  public void setNo(int no) {
-    this.no = no;
+  public void setId(String id) {
+    this.id = id;
   }
-
+  
   public int getBookNo() {
     return bookNo;
   }

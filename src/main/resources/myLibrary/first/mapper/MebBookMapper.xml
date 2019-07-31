@@ -7,13 +7,12 @@
 <mapper namespace="myLibrary.first.dao.MebBookDao">
   
   <resultMap type="mebBook" id="mebBookMap">
-    <id column="meb_no"  property="no"/>
+    <id column="meb_id"  property="id"/>
     <id column="book_no"  property="bookNo"/>
     <result column="read_date"  property="readDate"/>
     
   <association property="member" javaType="Member">
-    <id column="meb_no"  property="no"/>
-    <result column="meb_id"   property="id"/>
+    <id column="meb_id"   property="id"/>
     <result column="meb_pw"  property="pw"/>
   </association>
     
@@ -30,27 +29,27 @@
   
   <sql id="select1">
     select
-     r.meb_no,
+     r.meb_id,
      r.book_no,
      read_date
     from
      MEB_RBOOK r
-     left outer join member m on r.meb_no = m.meb_no
+     left outer join member m on r.meb_id = m.meb_id
      left outer join book b on r.book_no = b.book_no
   </sql>
   
   
   <!-- 책 추가(읽은 책) -->
-  <insert id="insert" parameterType="book"
-          useGeneratedKeys="true" keyColumn="meb_no" keyProperty="no">
+  <insert id="insert" parameterType="mebBook"
+          useGeneratedKeys="true" keyColumn="meb_id" keyProperty="id">
     insert into MEB_RBOOK(
-      meb_no,
+      meb_id,
       book_no,
       read_date)
     values(
-      #{no},
+      #{id},
       #{bookNo},
-      #{readDate}
+      #{readDate})
   </insert>
   
   

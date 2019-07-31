@@ -7,8 +7,7 @@
 <mapper namespace="myLibrary.first.dao.MemberDao">
   
   <resultMap type="member" id="memberMap">
-    <id column="meb_no"  property="no"/>
-    <result column="meb_id"   property="id"/>
+    <id column="meb_id"   property="id"/>
     <result column="meb_pw"  property="pw"/>
   
   </resultMap>
@@ -18,7 +17,6 @@
   
   <sql id="select1">
     select
-     meb_no,
      meb_id,
      meb_pw
     from
@@ -27,7 +25,7 @@
   
   <!-- 회원가입 할때. -->
   <insert id="join" parameterType="member"
-          useGeneratedKeys="true" keyColumn="meb_no" keyProperty="no">
+          useGeneratedKeys="true" keyColumn="meb_id" keyProperty="id">
     insert into member(
       meb_id,
       meb_pw)
@@ -50,9 +48,9 @@
   
   
   <!-- 회원탈퇴 할때. -->
-  <delete id="ban" parameterType="int">
+  <delete id="ban" parameterType="String">
     delete from member
-    where meb_no = #{no}
+    where meb_id = #{id}
   </delete>
 
 </mapper>

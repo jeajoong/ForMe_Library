@@ -55,23 +55,23 @@ values("호밀밭의 파수꾼", '제롬 데이비드 샐린저', 10000);
 
 
 --유저 데이터
-insert into MEMBER(meb_no, meb_id, meb_pw) values (1, 'test', password('t'));
-insert into MEMBER(meb_no, meb_id, meb_pw) values (2, 'bot1', password('1'));
-insert into MEMBER(meb_no, meb_id, meb_pw) values (3, 'bot2', password('2'));
+insert into MEMBER(meb_id, meb_pw) values ('test', password('t'));
+insert into MEMBER(meb_id, meb_pw) values ('bot1', password('1'));
+insert into MEMBER(meb_id, meb_pw) values ('bot2', password('2'));
 
 
 -- 읽은 책 데이터
-insert into MEB_RBOOK(meb_no, book_no, read_date) values (1, 2, "2019-3-16");
-insert into MEB_RBOOK(meb_no, book_no, read_date) values (1, 3, "2019-4-16");
-insert into MEB_RBOOK(meb_no, book_no, read_date) values (1, 4, "2019-5-16");
-insert into MEB_RBOOK(meb_no, book_no, read_date) values (1, 5, "2019-6-16");
-insert into MEB_RBOOK(meb_no, book_no, read_date) values (1, 6, "2019-1-6");
-insert into MEB_RBOOK(meb_no, book_no, read_date) values (1, 8, "2018-3-16");
-insert into MEB_RBOOK(meb_no, book_no, read_date) values (1, 10, "2018-4-16");
-insert into MEB_RBOOK(meb_no, book_no, read_date) values (1, 12, "2018-1-16");
-insert into MEB_RBOOK(meb_no, book_no, read_date) values (1, 11, "2016-7-16");
-insert into MEB_RBOOK(meb_no, book_no, read_date) values (1, 13, "2017-7-3");
-insert into MEB_RBOOK(meb_no, book_no, read_date) values (1, 14, "2017-7-2");
-insert into MEB_RBOOK(meb_no, book_no, read_date) values (1, 15, "2017-7-1");
+insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 2, "2019-3-16");
+insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 3, "2019-4-16");
+insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 4, "2019-5-16");
+insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 5, "2019-6-16");
+insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 6, "2019-1-6");
+insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 8, "2018-3-16");
+insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 10, "2018-4-16");
+insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 12, "2018-1-16");
+insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 11, "2016-7-16");
+insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 13, "2017-7-3");
+insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 14, "2017-7-2");
+insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 15, "2017-7-1");
 
 

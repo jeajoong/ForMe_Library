@@ -7,6 +7,6 @@ import myLibrary.first.domain.Book;
 
 public interface BookService {
   int insert(Book book);
-  int add(int memberNo, int bookNo, Date readDate);
+  int add(String id, int bookNo, Date readDate);
   List<Book> list();
 }
