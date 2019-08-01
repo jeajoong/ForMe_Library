@@ -18,7 +18,6 @@
 <jsp:include page="../header.jsp"/>
 
   <div id="roof">
-    <h1 style="text-align:center">도서관리 시스템</h1>
   </div>
 
   <div class="container">
@@ -71,20 +70,25 @@
             <th class="th-sm">번호</th>   
             <th class="th-sm">제목</th>
             <th class="th-sm">글쓴이</th>
-            <th class="th-sm">책 가격</th>
+            <th class="th-sm">읽은 날짜</th>
             <!-- <th class="th-sm">읽은 날짜</th> -->
             <th class="th-sm">관리</th>
           </tr>
         </thead>
         <tbody>
-           <c:forEach items="${list}" var="all">
+           <c:forEach items="${readBook}" var="readBooks">
             <tr>
-              <td scope="row">${all.bookNo}</td>
-              <td scope="row">${all.bookName}</td>
-              <td scope="row">${all.bookAuthor}</td>
-              <td scope="row">${all.bookPrice}</td>
+              <td scope="row">${readBooks.bookNo}</td>
+              <td scope="row">${readBooks.book.bookName}</td>
+              <td scope="row">${readBooks.book.bookAuthor}</td>
+              <td scope="row">${readBooks.readDate}</td>
             </tr>
            </c:forEach>
+            <c:if test="${empty sessionScope.loginUser}">
+            <tr>
+              <td scope="row">로그인을 해주세요.</td>
+            </tr>
+            </c:if>
         </tbody>
       </table>
 

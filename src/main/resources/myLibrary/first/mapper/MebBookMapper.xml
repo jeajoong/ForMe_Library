@@ -30,13 +30,25 @@
   <sql id="select1">
     select
      r.meb_id,
-     r.book_no,
+     b.book_no,
+     b.book_name,
+     b.book_author,
+     b.book_price,
      read_date
     from
      MEB_RBOOK r
      left outer join member m on r.meb_id = m.meb_id
      left outer join book b on r.book_no = b.book_no
   </sql>
+  
+  
+  <select id="readList" resultMap="mebBookMap" parameterType="String">
+  <include refid="select1"/>
+    where
+     r.meb_id = #{id}
+    order by
+     read_date desc
+  </select>
   
   
   <!-- 책 추가(읽은 책) -->

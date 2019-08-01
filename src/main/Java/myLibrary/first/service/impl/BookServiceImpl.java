@@ -38,11 +38,16 @@ public class BookServiceImpl implements BookService{
     return mebBookDao.insert(mebBook);
   }
 
-  @Override
+  @Override // 책 목록
   public List<Book> list() {
     return bookDao.list();
 }
 
+
+  @Override // 유저의 읽은책 목록
+  public List<MebBook> readList(String id) {
+    return mebBookDao.readList(id);
+  }
 
 
 

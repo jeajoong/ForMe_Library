@@ -13,12 +13,16 @@ public class MebBook implements Cloneable, Serializable {
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
   private Date readDate;
   
+  private Member member;
+  private Book book;
+
   
   @Override
   public String toString() {
-    return "MebBook [id=" + id + ", bookNo=" + bookNo + ", readDate=" + readDate + "]";
+    return "MebBook [id=" + id + ", bookNo=" + bookNo + ", readDate=" + readDate + ", member=" + member + ", book="
+        + book + "]";
   }
-
+  
   
   public String getId() {
     return id;
@@ -42,6 +46,22 @@ public class MebBook implements Cloneable, Serializable {
 
   public void setReadDate(Date readDate) {
     this.readDate = readDate;
+  }
+
+  public Member getMember() {
+    return member;
+  }
+
+  public void setMember(Member member) {
+    this.member = member;
+  }
+
+  public Book getBook() {
+    return book;
+  }
+
+  public void setBook(Book book) {
+    this.book = book;
   }
   
 }
