@@ -7,12 +7,19 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import myLibrary.first.domain.Member;
 import myLibrary.first.service.MemberService;
@@ -42,35 +49,51 @@ public class AuthController {
     }
   }
   
-  @GetMapping("joinform")
-  public String joinForm(
-      @RequestHeader(value="Referer",required=false) String refererUrl,
-      HttpSession session) {
+//  @GetMapping("joinform")
+//  public String joinForm(
+//      @RequestHeader(value="Referer",required=false) String refererUrl,
+//      HttpSession session) {
+//    
+//    return "auth/joinform";
+//  }
+  
+  @PostMapping("join/{id}")
+  @ResponseBody
+  public String join(@PathVariable String id, @RequestBody String pw) throws ParseException {
     
-    return "auth/joinform";
+    JSONParser jsonParser = new JSONParser();
+    JSONObject jsonObj = (JSONObject) jsonParser.parse(pw); 
+    String password = (String) jsonObj.get("pw");
+    
+    Member newMember = new Member();
+    newMember.setId(id);
+    newMember.setPw(password);
+    
+    memberService.join(newMember);
+    
+    return "1";
   }
   
   
-  @PostMapping("join")
-  public String join(Member member, HttpSession session) {
-    
-    System.out.println(member.getId() + "회원 회원가입");
-    memberService.join(member);
-    
-    return "redirect:../library";
-  }
   
-  @PostMapping("login")
+  @PostMapping("login/{id}")
+  @ResponseBody
   public String login(
-      String id,
-      String pw,
-      String saveId,
+      @PathVariable String id,
+      @RequestBody String pw,
+      @RequestBody String saveId,
       HttpSession session,
-      HttpServletResponse response) {
+      HttpServletResponse response) throws ParseException {
 
-    logger.debug(id);
-    logger.debug(pw);
-    logger.debug(saveId);
+    System.out.println(id);
+    System.out.println(pw);
+    System.out.println(saveId);
+    
+    
+    JSONParser jsonParser = new JSONParser();
+    JSONObject jsonObj = (JSONObject) jsonParser.parse(pw); 
+    String password = (String) jsonObj.get("pw");
+    
     
     Cookie cookie;
     if (saveId != null) {
@@ -83,10 +106,10 @@ public class AuthController {
     }
     response.addCookie(cookie); 
 
-    Member member = memberService.get(id, pw);
+    Member member = memberService.get(id, password);
 
     if (member == null) {
-      return "auth/fail";
+      return "0"; // fail
     }
 
     session.setAttribute("loginUser", member);
@@ -96,12 +119,14 @@ public class AuthController {
     logger.debug("refererUrl: " + refererUrl);
     
     if (refererUrl == null) {      
-      return "redirect:.."; // 웹 애플리케이션 루트(컨텍스트 루트)를 의미한다.
+      return "1"; // 웹 애플리케이션 루트(컨텍스트 루트)를 의미한다.
       
-    } else {
+    } else { // 사실상 이거 필요없음..
       return "redirect:" + refererUrl;
     }
   }
+  
+  
   
   @GetMapping("logout")
   public String logout(HttpSession session) throws Exception {

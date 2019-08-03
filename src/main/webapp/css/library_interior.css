@@ -1,14 +1,27 @@
-
-#roof{
-  height: 50px;
+#newBookTable{
+  margin-bottom:50px;
 }
 
+#readAddTable{
+  margin-bottom:50px;
+}
+
+#readListTable{
+  margin-bottom:50px;
+}
+
+#roof{
+  height:50px;
+}
 
 #selectBookArea{
   width:560px;
 }
 
 #selectBox{
- width:535px; 
+  width:535px;
 }
-     
+
+#readList{
+  text-align:center;
+}

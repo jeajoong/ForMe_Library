@@ -7,7 +7,7 @@
 <title>읽은책 관리</title>
 
 <link href="${contextRootPath}/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="${contextRootPath}/css/library_interior.css" rel="stylesheet"/>
+<link href="${contextRootPath}/css/library_interior.css?ver=1" rel="stylesheet"/>
 
 <link href="${contextRootPath}/node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 <link href="${contextRootPath}/jquery-ui-1.12.1.datepicker2/jquery-ui.css" rel="stylesheet"/> 
@@ -22,20 +22,48 @@
 
   <div class="container">
 
-<table class="table">
+<c:if test="${!empty sessionScope.loginUser}">
+<table class="table" id="newBookTable"> <!-- 숨겨져있다가 책추가하기 버튼누르면 스르륵 나타나게 하기 -->
         <thead>
           <tr>
-            <th class="th-sm">책</th>
-            <th class="th-sm">읽은 날짜</th>
-            <th class="th-sm">관리</th>
+            <th class="th-sm" colspan="4">새로운 책 등록</th>
           </tr>
         </thead>
         <tbody>
         <tr>
+        <td>
+               책 제목 : <input autocomplete=off type="text" id="bookTitle" class="form-control" name="bookTitle">
+        </td>
+        <td>
+               작가 : <input autocomplete=off type="text" id="bookAuthor" class="form-control" name="bookAuthor">
+        </td>
+        <td>
+               가격 : <input autocomplete=off type="number" id="bookPrice" class="form-control" name="bookPrice" 
+        value=0 maxlength="7" oninput="numberMaxLength(this);">
+        </td>
+        <td>
+        <button type="Button" class="btn btn-primary" id="BookRegi">등록하기</button>
+        </td>
+        </tr>
         
+        </tbody>
+</table>
+</c:if>
+
+
+<c:if test="${!empty sessionScope.loginUser}">
+<table class="table" id="readAddTable">
+        <thead>
+          <tr>
+            <th class="th-sm" colspan="3">읽은 책 목록에 추가하기</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <!-- 검색창으로 바꾸고 추천검색어 뜨게 하기 -->
         <td scope="row" id="selectBookArea">
         <select name='bookCho' class="form-control" id="selectBox">
-                 <option value="" selected>책 선택</option>
+                 <option value="" disabled selected hidden>책 선택</option>
                   <c:forEach items="${list}" var="all">
                     <option value='${all.bookNo}'>${all.bookName} / ${all.bookAuthor} / ${all.bookPrice} </option>
                   </c:forEach>
@@ -44,7 +72,7 @@
         
         <td scope="row" id="datepick">
           <div class="md-form">
-            <input autocomplete=off class="form-control-sm" type="text" id="datepicker" readonly>
+                       날짜 : <input autocomplete=off class="form-control-sm" type="text" id="datepicker" readonly>
               <button type="button" class="btn btn-dark" id="name-clear-btn3">초기화</button>
           </div>
           
@@ -57,17 +85,23 @@
         
         </td>
         <td>
+        
         <button type="Button" class="btn btn-primary" id="regi">등록하기</button>
+        
         </td>
         </tr>
         
         </tbody>
 </table>
+</c:if>
 
-      <table class="table"> <!-- 이 테이블은 로그인 한 유저의 읽은 책 목록을 불러올 것임 임시로 책 목록 출력. -->
+<table class="table" id="readListTable"> 
         <thead>
+            <tr>
+            <th class="th-sm" colspan="5" id="readList">읽은 책 목록</th>   
+          </tr>
           <tr>
-            <th class="th-sm">번호</th>   
+            <th class="th-sm">책의 번호</th>   
             <th class="th-sm">제목</th>
             <th class="th-sm">글쓴이</th>
             <th class="th-sm">읽은 날짜</th>
@@ -82,6 +116,10 @@
               <td scope="row">${readBooks.book.bookName}</td>
               <td scope="row">${readBooks.book.bookAuthor}</td>
               <td scope="row">${readBooks.readDate}</td>
+              <td scope="row">
+              <button type="Button" class="btn btn-primary" id="re">수정</button>
+              <button type="Button" class="btn btn-primary" id="del">삭제</button>
+              </td>
             </tr>
            </c:forEach>
             <c:if test="${empty sessionScope.loginUser}">
@@ -90,7 +128,7 @@
             </tr>
             </c:if>
         </tbody>
-      </table>
+</table>
 
 
 </div>
@@ -100,6 +138,12 @@
 <script src="${contextRootPath}/jquery-ui-1.12.1.datepicker2/jquery-ui.min.js"></script>
 <script src="${contextRootPath}/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script>
+             function numberMaxLength(e){
+                  if(e.value.length > e.maxLength){
+                      e.value = e.value.slice(0, e.maxLength);
+                 }
+             }
+
              $("#datepicker").on("keyup", function() {
                 var value = $(this).val().toLowerCase(); 
                   $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
