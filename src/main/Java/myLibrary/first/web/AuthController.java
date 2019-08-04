@@ -76,24 +76,14 @@ public class AuthController {
   
   
   
-  @PostMapping("login/{id}")
-  @ResponseBody
+  @PostMapping("login")
   public String login(
-      @PathVariable String id,
-      @RequestBody String pw,
-      @RequestBody String saveId,
+      String id, String pw, String saveId,
       HttpSession session,
       HttpServletResponse response) throws ParseException {
 
     System.out.println(id);
-    System.out.println(pw);
     System.out.println(saveId);
-    
-    
-    JSONParser jsonParser = new JSONParser();
-    JSONObject jsonObj = (JSONObject) jsonParser.parse(pw); 
-    String password = (String) jsonObj.get("pw");
-    
     
     Cookie cookie;
     if (saveId != null) {
@@ -106,7 +96,7 @@ public class AuthController {
     }
     response.addCookie(cookie); 
 
-    Member member = memberService.get(id, password);
+    Member member = memberService.get(id, pw);
 
     if (member == null) {
       return "0"; // fail
@@ -116,12 +106,10 @@ public class AuthController {
 
     String refererUrl = (String) session.getAttribute(REFERER_URL);
     
-    logger.debug("refererUrl: " + refererUrl);
-    
-    if (refererUrl == null) {      
-      return "1"; // 웹 애플리케이션 루트(컨텍스트 루트)를 의미한다.
+    if (refererUrl == null) {
+      return "redirect:../library"; // 웹 애플리케이션 루트(컨텍스트 루트)를 의미한다.
       
-    } else { // 사실상 이거 필요없음..
+    } else { 
       return "redirect:" + refererUrl;
     }
   }

@@ -49,6 +49,7 @@
       <div class="modal-body">
       
       <!--  -->
+      
             <div class="form-group">
               <label for="id">아이디</label>
               <input type="text" class="form-control" id="newId" name="newId"
@@ -62,7 +63,6 @@
               <label for="password">비밀번호 확인</label>
               <input type="password" class="form-control" placeholder="암호를 다시한번 입력하세요.">
             </div>
-            
       <!--  -->
       
       </div>
@@ -86,6 +86,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form action='auth/login' method='post'>
       <div class="modal-body">
       
       <!--  -->
@@ -103,12 +104,12 @@
               <input type="checkbox" class="form-check-input" id="saveId" name="saveId">
               <label class="form-check-label" for="saveId">아이디 저장</label>
             </div>
-            
       <!--  -->
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary" id="login">로그인</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -185,64 +186,7 @@
            });
 
 
-    $('#login').on('click', function(){ // 로그인 버튼 누를 때.
-        
-        var inId = $("#id").val();
-        var inPw = $("#pw").val();
-        var saveinId= $("#saveId").val();
-        
-        console.log(inId);
-        console.log(inPw);
-        
-        if (inId == "") {
-       	 swalWithBootstrapButtons.fire({
-    	            title: "아이디를 입력해주세요!",
-    	            type: 'info'
-    	        }).then((result) => {
-    	            if (result.value) {
-    	              return false;
-    	            }
-    	        })
-       	    return false;
-         }
-        if (inPw == "") {
-          	 swalWithBootstrapButtons.fire({
-    	            title: "비밀번호를 입력해주세요!",
-    	            type: 'info'
-    	        }).then((result) => {
-    	            if (result.value) {
-    	              return false;
-    	            }
-    	        })
-          	    return false;
-            }
-        
-             $.ajax({
-                 type:"POST",
-                 url:'auth/login/'+ inId,
-                 contentType: 'application/json',
-                 dataType: "text",
-                 data:JSON.stringify({
-                	 pw: inPw,
-                	 saveId: saveinId
-                 }),
-                 success : function(data) {
-                   console.log(data)
-                   if (data == 1) {
-                 	  swalWithBootstrapButtons.fire({
-                          title: "로그인 성공!",
-                          type: 'success'
-                      }).then((result) => {
-                          if (result.value) {
-                            location.href="library";
-                            return false;
-                          }
-                      })
-                  }
-                   }
-                 })
-         
-           });
+
     
     
     
