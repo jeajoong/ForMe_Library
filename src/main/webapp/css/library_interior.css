@@ -22,6 +22,22 @@
   width:535px;
 }
 
+#bookNoTitle{
+  text-align:center;
+}
+
+#bookNum{
+  text-align:center;
+}
+
+#manageTitle{
+  text-align:center;
+}
+
+#managebuttons{
+  text-align:center;
+}
+
 #readList{
   text-align:center;
 }

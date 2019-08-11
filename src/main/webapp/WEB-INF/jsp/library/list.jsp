@@ -7,7 +7,7 @@
 <title>읽은책 관리</title>
 
 <link href="${contextRootPath}/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="${contextRootPath}/css/library_interior.css?ver=1" rel="stylesheet"/>
+<link href="${contextRootPath}/css/library_interior.css?ver=2" rel="stylesheet"/>
 
 <link href="${contextRootPath}/node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 <link href="${contextRootPath}/jquery-ui-1.12.1.datepicker2/jquery-ui.css" rel="stylesheet"/> 
@@ -70,7 +70,7 @@
         </select>
         </td>
         
-        <td scope="row" id="datepick">
+        <td scope="row" id="datepick" style="width:390px">
           <div class="md-form">
                        날짜 : <input autocomplete=off class="form-control-sm" type="text" id="datepicker" readonly>
               <button type="button" class="btn btn-dark" id="name-clear-btn3">초기화</button>
@@ -101,22 +101,22 @@
             <th class="th-sm" colspan="5" id="readList">읽은 책 목록</th>   
           </tr>
           <tr>
-            <th class="th-sm">책의 번호</th>   
+            <th class="th-sm" id="bookNoTitle">책의 번호</th>   
             <th class="th-sm">제목</th>
             <th class="th-sm">글쓴이</th>
             <th class="th-sm">읽은 날짜</th>
             <!-- <th class="th-sm">읽은 날짜</th> -->
-            <th class="th-sm">관리</th>
+            <th class="th-sm" id="manageTitle">관리</th>
           </tr>
         </thead>
         <tbody>
            <c:forEach items="${readBook}" var="readBooks">
             <tr>
-              <td scope="row">${readBooks.bookNo}</td>
+              <td scope="row" id="bookNum">${readBooks.bookNo}</td>
               <td scope="row">${readBooks.book.bookName}</td>
               <td scope="row">${readBooks.book.bookAuthor}</td>
               <td scope="row">${readBooks.readDate}</td>
-              <td scope="row">
+              <td scope="row" id="managebuttons">
               <button type="Button" class="btn btn-primary" id="re">수정</button>
               <button type="Button" class="btn btn-primary" id="del">삭제</button>
               </td>
@@ -144,6 +144,71 @@
                  }
              }
 
+             
+             
+             $('#BookRegi').on('click', function() {
+                 
+                 var NBkTitle = $("#bookTitle").val();
+                 var NBkAuthor = $("#bookAuthor").val();
+                 var NBkPrice = $("#bookPrice").val();
+                 
+                 if (NBkTitle == "") {
+                   	 swalWithBootstrapButtons.fire({
+             	            title: "책 제목을 입력해주세요!",
+             	            type: 'info'
+             	        }).then((result) => {
+             	            if (result.value) {
+             	              return false;
+             	            }
+             	        })
+                   	    return false;
+                     }
+                 if (NBkAuthor == "") {
+                     swalWithBootstrapButtons.fire({
+                           title: "작가를 입력해주세요!",
+                           type: 'info'
+                       }).then((result) => {
+                           if (result.value) {
+                              return false;
+                          }
+                      })
+                        return false;
+                     }
+                 
+                 console.log(NBkTitle);
+                 console.log(NBkAuthor);
+                 console.log(NBkPrice);
+                      $.ajax({
+                          type:"POST",
+                          url:'library/add',
+                          contentType: 'application/json',
+                          dataType: "text",
+                          data:JSON.stringify({
+                           bookName: NBkTitle,
+                           bookAuthor: NBkAuthor,
+                           bookPrice: NBkPrice
+                          }),
+                          success : function(data) {
+                            console.log(data)
+                            if (data == 1) {
+                          	  swalWithBootstrapButtons.fire({
+                                   title: "책이 추가되었습니다.",
+                                   type: 'success'
+                               }).then((result) => {
+                                   if (result.value) {
+                                     location.href="library";
+                                     return false;
+                                   }
+                               })
+                           }
+                            }
+                          })
+                  
+                    });
+                 
+                 
+                 
+                 
              $("#datepicker").on("keyup", function() {
                 var value = $(this).val().toLowerCase(); 
                   $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
@@ -185,6 +250,10 @@
              });
              
              
+             
+             
+             
+             
              $('#regi').on('click', function(){ // 읽은 책 목록으로 요청할때.
             
             var choiceBook = $("#selectBox option:selected").val();
@@ -215,7 +284,7 @@
             
             console.log(choiceBook);
             console.log(inputDate);
-            inputDate;
+            
                  $.ajax({
                      type:"POST",
                      url:'library/insert/' + choiceBook,

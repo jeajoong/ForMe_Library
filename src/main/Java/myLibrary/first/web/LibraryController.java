@@ -29,8 +29,6 @@ import myLibrary.first.service.BookService;
 @RequestMapping("/library")
 public class LibraryController {
 
-  private static final Logger logger = LogManager.getLogger(LibraryController.class);
-  
   @Autowired BookService bookService;
   
   @GetMapping
@@ -49,14 +47,36 @@ public class LibraryController {
     return "library/list";
   }
   
-  //책 정보를 추가하는 용.
-  @GetMapping("/add")
-  public int insert(Book book) {
-    return 0;
+  //책 정보를 추가
+  @RequestMapping(value = "/add", method = {RequestMethod.GET, RequestMethod.POST})
+  @ResponseBody
+  public int insert(@RequestBody String json, // RequestBody로 객체 하나하나 다 받으려고 하면 400오류남 이렇게 해야함
+      HttpSession session) throws ParseException {
+    
+    System.out.println(json);
+    
+    JSONParser jsonParser = new JSONParser();
+    JSONObject jsonObj = (JSONObject) jsonParser.parse(json);
+    
+    String bookName = (String) jsonObj.get("bookName");
+    String bookAuthor = (String) jsonObj.get("bookAuthor");
+    String price = (String) jsonObj.get("bookPrice");
+    int bookPrice = Integer.parseInt(price);
+    
+    System.out.println(bookName);
+    System.out.println(bookAuthor);
+    System.out.println(bookPrice);
+    
+    Book book = new Book();
+    book.setBookName(bookName);
+    book.setBookAuthor(bookAuthor);
+    book.setBookPrice(bookPrice);
+    
+    bookService.insert(book);
+    return 1;
   }
   
-  
-  // 읽은 책 데이터 넣을 때
+  // 읽은 책 데이터 추가
   @RequestMapping(value = "insert/{no}", method = {RequestMethod.GET, RequestMethod.POST})
   @ResponseBody
   public String submit(
