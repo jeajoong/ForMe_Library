@@ -3,12 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link href="${contextRootPath}/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-
+<link href="${contextRootPath}/css/headerSY.css?ver=6" rel="stylesheet"/>
+<link href='https://fonts.googleapis.com/css?family=Montserrat:700|Pinyon+Script' rel='stylesheet' type='text/css'>
 <body>
 <header>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="${contextRootPath}/app/library">도서관리시스템</a>
+<a href="${contextRootPath}/app/library">
+<div class="e">
+  <h1 class="navbar-brand">도서관리시스템</h1>
+  <h2>My</h2>
+</div>
+</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" 
   data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
   aria-expanded="false" aria-label="Toggle navigation">

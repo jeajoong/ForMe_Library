@@ -7,7 +7,7 @@
 <title>읽은책 관리</title>
 
 <link href="${contextRootPath}/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="${contextRootPath}/css/library_interior.css?ver=2" rel="stylesheet"/>
+<link href="${contextRootPath}/css/library_interior.css?ver=4" rel="stylesheet"/>
 
 <link href="${contextRootPath}/node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 <link href="${contextRootPath}/jquery-ui-1.12.1.datepicker2/jquery-ui.css" rel="stylesheet"/> 
@@ -18,6 +18,14 @@
 <jsp:include page="../header.jsp"/>
 
   <div id="roof">
+  
+<!--   <dl>
+  <dt>새로운 책 등록하기</dt>
+    <dd>
+  
+    </dd>
+  </dl> -->
+
   </div>
 
   <div class="container">
@@ -138,6 +146,15 @@
 <script src="${contextRootPath}/jquery-ui-1.12.1.datepicker2/jquery-ui.min.js"></script>
 <script src="${contextRootPath}/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script>
+              $(function(){
+                  $("dt").click(function(){
+                    $(this).toggleClass("open");
+                    if($(this).hasClass("open"))
+                      $("dt").not(this).removeClass("open");
+                  })
+                })
+
+
              function numberMaxLength(e){
                   if(e.value.length > e.maxLength){
                       e.value = e.value.slice(0, e.maxLength);
