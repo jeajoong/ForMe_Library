@@ -4,89 +4,30 @@
 }
 
 
-/* dl, dt => 펼쳐지거 관련  */
-dl{
-  margin:30px auto 60px;
-  max-width:1100px;
-}
-
-dt{
-  background:#e3ffdd;
-  color:#81deda;
-  font-weight:600;
-  padding:15px;
-  position:relative;
-  text-align:left;
-  text-transform:uppercase;
-  transition: all .5s;
-}
-
-dt:after,dt:before{
-  content:"\f078";
-  font-family:fontAwesome;
-  position:absolute;
-  right:15px;
-  height:28px;
-  top:0;
-  bottom:0;
-  margin:auto;
-  
-  transition:all .7s ease-in-out;
-}
-
-dt:before{
-  opacity:0;
-  transition:all .4s ease-in-out;
-}
-
-dt:hover{
-  cursor:pointer;
-}
-
-dt + dd{
-  max-height:0;
-}
-
-dd{
-  background:#e3ffdd;
-  color:#edeff3;
-  margin:0;
-  overflow:hidden;
-  
-  transition: all .5s;
-}
-
-dt.open{
-  background:#b6ffa6;
-  border-color:#b6ffa6;
-  color:#7de19e;
-  margin:-5px;
-}
-
-dt.open:after{
-  transform:rotate(180deg) translateY(-2px);
-}
-dt.open:before{
-  opacity:1;
-  transform:rotate(-360deg) translateY(-3px);
-}
-
-dt.open + dd{
-  padding:15px 15px 30px;
-  margin:0 -5px;
-  max-height:200px;
-}
-
-/* dl, dt 관련 끝 */
-
-
-
 #newBookTable{
-  margin-bottom:50px;
+  text-align:center;
+}
+
+#addLine{
+  width: 1100px;
+}
+
+#bookTitle{
+  width: 500px;
+}
+#bookAuthor{
+  width: 300px;
+}
+bookPrice{
+  width: 100px;
 }
 
 #readAddTable{
-  margin-bottom:50px;
+  text-align:center;
+}
+
+#RegiBtnArea{
+  width:120px;
 }
 
 #readListTable{

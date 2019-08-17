@@ -7,8 +7,7 @@
 <title>읽은책 관리</title>
 
 <link href="${contextRootPath}/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="${contextRootPath}/css/library_interior.css?ver=4" rel="stylesheet"/>
-
+<link href="${contextRootPath}/css/library_interior.css?ver=1" rel="stylesheet"/>
 <link href="${contextRootPath}/node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 <link href="${contextRootPath}/jquery-ui-1.12.1.datepicker2/jquery-ui.css" rel="stylesheet"/> 
 </head>
@@ -19,13 +18,6 @@
 
   <div id="roof">
   
-<!--   <dl>
-  <dt>새로운 책 등록하기</dt>
-    <dd>
-  
-    </dd>
-  </dl> -->
-
   </div>
 
   <div class="container">
@@ -33,14 +25,14 @@
 <c:if test="${!empty sessionScope.loginUser}">
 <table class="table" id="newBookTable"> <!-- 숨겨져있다가 책추가하기 버튼누르면 스르륵 나타나게 하기 -->
         <thead>
-          <tr>
-            <th class="th-sm" colspan="4">새로운 책 등록</th>
+          <tr onclick="javascript:doDisplay();" style="background-color: #F3F3F3;">
+            <th class="th-sm" colspan="4">새로운 책 등록 </th>
           </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr id="addLine" style="display:none;">
         <td>
-               책 제목 : <input autocomplete=off type="text" id="bookTitle" class="form-control" name="bookTitle">
+         <div style="inline;">책 제목 : <input autocomplete=off type="text" id="bookTitle" class="form-control" name="bookTitle"></div>
         </td>
         <td>
                작가 : <input autocomplete=off type="text" id="bookAuthor" class="form-control" name="bookAuthor">
@@ -49,11 +41,10 @@
                가격 : <input autocomplete=off type="number" id="bookPrice" class="form-control" name="bookPrice" 
         value=0 maxlength="7" oninput="numberMaxLength(this);">
         </td>
-        <td>
+        <td id="RegiBtnArea">
         <button type="Button" class="btn btn-primary" id="BookRegi">등록하기</button>
         </td>
         </tr>
-        
         </tbody>
 </table>
 </c:if>
@@ -62,12 +53,12 @@
 <c:if test="${!empty sessionScope.loginUser}">
 <table class="table" id="readAddTable">
         <thead>
-          <tr>
+          <tr onclick="javascript:doDisplay2();" style="background-color: #F3F3F3;">
             <th class="th-sm" colspan="3">읽은 책 목록에 추가하기</th>
           </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr id="addLine2" style="display:none;">
         <!-- 검색창으로 바꾸고 추천검색어 뜨게 하기 -->
         <td scope="row" id="selectBookArea">
         <select name='bookCho' class="form-control" id="selectBox">
@@ -78,7 +69,7 @@
         </select>
         </td>
         
-        <td scope="row" id="datepick" style="width:390px">
+        <td scope="row" id="datepick" style="width:420px">
           <div class="md-form">
                        날짜 : <input autocomplete=off class="form-control-sm" type="text" id="datepicker" readonly>
               <button type="button" class="btn btn-dark" id="name-clear-btn3">초기화</button>
@@ -154,7 +145,27 @@
                   })
                 })
 
-
+              
+              function doDisplay(){
+                  var con = document.getElementById("addLine");
+                  if(con.style.display=='none'){
+                      con.style.display = 'block';
+                  }else{
+                      con.style.display = 'none';
+                  }
+              }
+              
+              
+              function doDisplay2(){
+                var con2 = document.getElementById("addLine2");
+                if(con2.style.display=='none'){
+                    con2.style.display = 'block';
+                }else{
+                    con2.style.display = 'none';
+                }
+            }
+                
+                
              function numberMaxLength(e){
                   if(e.value.length > e.maxLength){
                       e.value = e.value.slice(0, e.maxLength);
