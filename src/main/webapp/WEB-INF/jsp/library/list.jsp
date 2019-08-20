@@ -100,10 +100,10 @@
             <th class="th-sm" colspan="5" id="readList">읽은 책 목록</th>   
           </tr>
           <tr>
-            <th class="th-sm" id="bookNoTitle">책의 번호</th>   
-            <th class="th-sm">제목</th>
-            <th class="th-sm">글쓴이</th>
-            <th class="th-sm">읽은 날짜</th>
+            <th class="th-sm" id="bookNoTitle" style="width:110px;">책의 번호</th>   
+            <th class="th-sm" style="width:330px;">제목</th>
+            <th class="th-sm" style="width:215px;">글쓴이</th>
+            <th class="th-sm" style="width:220px;">읽은 날짜</th>
             <!-- <th class="th-sm">읽은 날짜</th> -->
             <th class="th-sm" id="manageTitle">관리</th>
           </tr>
@@ -114,9 +114,28 @@
               <td scope="row" id="bookNum">${readBooks.bookNo}</td>
               <td scope="row">${readBooks.book.bookName}</td>
               <td scope="row">${readBooks.book.bookAuthor}</td>
-              <td scope="row">${readBooks.readDate}</td>
-              <td scope="row" id="managebuttons">
-              <button type="Button" class="btn btn-primary" id="re">수정</button>
+              <td scope="row" id="originDate" style="visibility:visible;">${readBooks.readDate}</td>
+               
+              <td scope="row" id="modifyDate" style="display:none; width:220px; padding:0px;">
+                <form action='modify' method='post' style="display:inline;">
+                  <div class="form-group" style="width:120px; float:left">
+                    <label for="modifyDate"></label>
+                    <input type="text" class="form-control" id="${readBooks.bookNo}" name="${readBooks.bookNo}"
+                           value='${readBooks.readDate}'>
+                  </div>
+                  <div style="display:inline;">
+                  <button class="btn btn-warning" style="margin-top:25px; position:absolute; margin-left:245px;">수정하기</button>
+                  <button class="btn btn-secondary" style="margin-top:25px; position:absolute; margin-left:340px;">취소</button>
+                  </div>
+                </form>
+              </td>
+              
+              <!-- !!! 확인사항. originDate, modifyDate, managebuttons row로 처리하려면
+                                               각자의 id값이 중복되면 안됨. 처리할것. -->
+              
+              <td scope="row" id="managebuttons" style="visibility:visible;">
+              <!-- 수정 버튼을 누르면 수정,삭제 사라져야 함. -->
+              <button type="Button" class="btn btn-primary" id="rev" onclick="javascript:revise();">수정</button>
               <button type="Button" class="btn btn-primary" id="del">삭제</button>
               </td>
             </tr>
@@ -162,6 +181,18 @@
                     con2.style.display = 'block';
                 }else{
                     con2.style.display = 'none';
+                }
+            }
+              
+              function revise(){
+                var action1 = document.getElementById("originDate");
+                var action2 = document.getElementById("managebuttons")
+                var action3 = document.getElementById("modifyDate")
+                
+                if(action1.style.visibility =='visible'){
+                    action1.style.display    = 'none';
+                    action2.style.display    = 'none';
+                    action3.style.display    = 'inline-block';
                 }
             }
                 

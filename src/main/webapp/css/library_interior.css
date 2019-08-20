@@ -57,8 +57,11 @@ bookPrice{
 
 #managebuttons{
   text-align:center;
+  width: 55px;
+  
 }
 
 #readList{
   text-align:center;
 }
+
