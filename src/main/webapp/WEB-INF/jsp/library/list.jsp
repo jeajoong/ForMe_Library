@@ -114,9 +114,9 @@
               <td scope="row" id="bookNum">${readBooks.bookNo}</td>
               <td scope="row">${readBooks.book.bookName}</td>
               <td scope="row">${readBooks.book.bookAuthor}</td>
-              <td scope="row" id="originDate" style="visibility:visible;">${readBooks.readDate}</td>
+              <td scope="row" id="${readBooks.bookNo}Origin" style="visibility:visible;">${readBooks.readDate}</td>
                
-              <td scope="row" id="modifyDate" style="display:none; width:220px; padding:0px;">
+              <td scope="row" id="${readBooks.bookNo}ModifyDate" style="display:none; width:220px; padding:0px;">
                 <form action='modify' method='post' style="display:inline;">
                   <div class="form-group" style="width:120px; float:left">
                     <label for="modifyDate"></label>
@@ -133,9 +133,9 @@
               <!-- !!! 확인사항. originDate, modifyDate, managebuttons row로 처리하려면
                                                각자의 id값이 중복되면 안됨. 처리할것. -->
               
-              <td scope="row" id="managebuttons" style="visibility:visible;">
+              <td scope="row" id="${readBooks.bookNo}Managebuttons" style="visibility:visible;">
               <!-- 수정 버튼을 누르면 수정,삭제 사라져야 함. -->
-              <button type="Button" class="btn btn-primary" id="rev" onclick="javascript:revise();">수정</button>
+              <button type="Button" class="btn btn-primary" id="rev" onclick="revise('${readBooks.bookNo}');">수정</button>
               <button type="Button" class="btn btn-primary" id="del">삭제</button>
               </td>
             </tr>
@@ -184,15 +184,18 @@
                 }
             }
               
-              function revise(){
-                var action1 = document.getElementById("originDate");
-                var action2 = document.getElementById("managebuttons")
-                var action3 = document.getElementById("modifyDate")
+              function revise(number){
+                var action1 = number+'Origin';
+                var action2 = number+'Managebuttons';
+                var action3 = number+'ModifyDate';
                 
-                if(action1.style.visibility =='visible'){
-                    action1.style.display    = 'none';
-                    action2.style.display    = 'none';
-                    action3.style.display    = 'inline-block';
+                console.log(action1);
+                console.log(action2);
+                console.log(action3);
+                if(document.getElementById(action1).style.visibility =='visible'){
+                   document.getElementById(action1).style.display    = 'none';
+                   document.getElementById(action2).style.display    = 'none';
+                   document.getElementById(action3).style.display    = 'block';
                 }
             }
                 
