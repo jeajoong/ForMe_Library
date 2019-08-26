@@ -105,7 +105,7 @@
             <th class="th-sm" style="width:215px;">글쓴이</th>
             <th class="th-sm" style="width:220px;">읽은 날짜</th>
             <!-- <th class="th-sm">읽은 날짜</th> -->
-            <th class="th-sm" id="manageTitle">관리</th>
+            <th class="th-sm" id="manageTitle" style="text-align: left; padding-left: 55px;">관리</th>
           </tr>
         </thead>
         <tbody>
@@ -114,29 +114,32 @@
               <td scope="row" id="bookNum">${readBooks.bookNo}</td>
               <td scope="row">${readBooks.book.bookName}</td>
               <td scope="row">${readBooks.book.bookAuthor}</td>
-              <td scope="row" id="${readBooks.bookNo}Origin" style="visibility:visible;">${readBooks.readDate}</td>
+              <td scope="row">
+              <div id="${readBooks.bookNo}Origin" style="visibility:visible;">${readBooks.readDate}</div>
                
-              <td scope="row" id="${readBooks.bookNo}ModifyDate" style="display:none; width:220px; padding:0px;">
-                <form action='modify' method='post' style="display:inline;">
-                  <div class="form-group" style="width:120px; float:left">
+              <div id="${readBooks.bookNo}ModifyDate" style="display:none; width:190px; height:38px; padding:0px;">
+                <form action='modify' method='post' style="display:;">
+                  <div class="form-group" style="width:120px; height:0px; position:relative; bottom:32px;">
                     <label for="modifyDate"></label>
                     <input type="text" class="form-control" id="${readBooks.bookNo}" name="${readBooks.bookNo}"
-                           value='${readBooks.readDate}'>
+                           value='${readBooks.readDate}' style="margin-top:9px;">
                   </div>
-                  <div style="display:inline;">
-                  <button class="btn btn-warning" style="margin-top:25px; position:absolute; margin-left:245px;">수정하기</button>
-                  <button class="btn btn-secondary" style="margin-top:25px; position:absolute; margin-left:340px;">취소</button>
+                  <div style="position:absolute; margin-left:205px;">
+                   <button class="btn btn-warning" style="position:absolute; margin-left: -10px; width: 101px; bottom: -24px;">수정하기</button>
+                   <a class="btn btn-secondary" style="position:absolute; margin-left: 95px; width: 70px; bottom: -24px;" onclick="cancel('${readBooks.bookNo}');">취소</a>
                   </div>
                 </form>
+                </div>
               </td>
               
               <!-- !!! 확인사항. originDate, modifyDate, managebuttons row로 처리하려면
                                                각자의 id값이 중복되면 안됨. 처리할것. -->
-              
-              <td scope="row" id="${readBooks.bookNo}Managebuttons" style="visibility:visible;">
-              <!-- 수정 버튼을 누르면 수정,삭제 사라져야 함. -->
-              <button type="Button" class="btn btn-primary" id="rev" onclick="revise('${readBooks.bookNo}');">수정</button>
-              <button type="Button" class="btn btn-primary" id="del">삭제</button>
+              <td scope="row">
+                <div id="${readBooks.bookNo}Managebuttons" style="visibility:visible;">
+                <!-- 수정 버튼을 누르면 수정,삭제 사라져야 함. -->
+                <button type="Button" class="btn btn-primary" id="rev" onclick="revise('${readBooks.bookNo}');">수정</button>
+                <button type="Button" class="btn btn-primary" id="del">삭제</button>
+                </div>
               </td>
             </tr>
            </c:forEach>
@@ -192,12 +195,25 @@
                 console.log(action1);
                 console.log(action2);
                 console.log(action3);
-                if(document.getElementById(action1).style.visibility =='visible'){
+               if(document.getElementById(action1).style.visibility =='visible'){
                    document.getElementById(action1).style.display    = 'none';
                    document.getElementById(action2).style.display    = 'none';
-                   document.getElementById(action3).style.display    = 'block';
+                   document.getElementById(action3).style.display    = '';
                 }
             }
+              
+              function cancel(number){
+                var action1_1 = number+'Origin';
+                var action2_2 = number+'Managebuttons';
+                var action3_3 = number+'ModifyDate';
+                
+               if(document.getElementById(action1_1).style.display   == 'none'){
+                  document.getElementById(action1_1).style.display    = '';
+                  document.getElementById(action2_2).style.display    = '';
+                  document.getElementById(action3_3).style.display    = 'none';
+               }
+                
+              }
                 
                 
              function numberMaxLength(e){
