@@ -50,5 +50,16 @@ public class BookServiceImpl implements BookService{
   }
 
 
+  @Override // 읽은 날짜 수정용
+  public int modify(String id, int bookNo, Date readDate) {
+    MebBook mebBook = new MebBook();
+    mebBook.setId(id);
+    mebBook.setBookNo(bookNo);
+    mebBook.setReadDate(readDate);
+    
+    return mebBookDao.modify(mebBook);
+  }
+
+
 
 }

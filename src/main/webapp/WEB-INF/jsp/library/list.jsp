@@ -118,14 +118,14 @@
               <div id="${readBooks.bookNo}Origin" style="visibility:visible;">${readBooks.readDate}</div>
                
               <div id="${readBooks.bookNo}ModifyDate" style="display:none; width:190px; height:38px; padding:0px;">
-                <form action='modify' method='post' style="display:;">
+                <form style="display:;">
                   <div class="form-group" style="width:120px; height:0px; position:relative; bottom:32px;">
                     <label for="modifyDate"></label>
-                    <input type="text" class="form-control" id="${readBooks.bookNo}" name="${readBooks.bookNo}"
+                    <input type="text" class="form-control" id="${readBooks.bookNo}M"
                            value='${readBooks.readDate}' style="margin-top:9px;">
                   </div>
                   <div style="position:absolute; margin-left:205px;">
-                   <button class="btn btn-warning" style="position:absolute; margin-left: -10px; width: 101px; bottom: -24px;">수정하기</button>
+                   <button id="modifyBtn" class="btn btn-warning" style="position:absolute; margin-left: -10px; width: 101px; bottom: -24px;">수정하기</button>
                    <a class="btn btn-secondary" style="position:absolute; margin-left: 95px; width: 70px; bottom: -24px;" onclick="cancel('${readBooks.bookNo}');">취소</a>
                   </div>
                 </form>
@@ -143,13 +143,13 @@
               </td>
             </tr>
            </c:forEach>
+        </tbody>
+</table>
             <c:if test="${empty sessionScope.loginUser}">
             <tr>
               <td scope="row">로그인을 해주세요.</td>
             </tr>
             </c:if>
-        </tbody>
-</table>
 
 
 </div>
@@ -191,15 +191,57 @@
                 var action1 = number+'Origin';
                 var action2 = number+'Managebuttons';
                 var action3 = number+'ModifyDate';
+                var action4 = number+'M';
                 
                 console.log(action1);
                 console.log(action2);
                 console.log(action3);
+                console.log(action4);
                if(document.getElementById(action1).style.visibility =='visible'){
                    document.getElementById(action1).style.display    = 'none';
                    document.getElementById(action2).style.display    = 'none';
                    document.getElementById(action3).style.display    = '';
                 }
+               
+               $('#modifyBtn').on('click', function() {
+                 var changedate = document.getElementById(action4);
+                 
+                 if (changedate == "") {
+                   	 swalWithBootstrapButtons.fire({
+             	            title: "날짜를 입력해주세요!",
+             	            type: 'info'
+             	        }).then((result) => {
+             	            if (result.value) {
+             	              return false;
+             	            }
+             	        })
+                   	    return false;
+                     }
+                 
+                      $.ajax({
+                          type:"POST",
+                          url:'library/modify/'+ number,
+                          contentType: 'application/json',
+                          dataType: "text",
+                          data:JSON.stringify({
+                           readDate: changedate
+                          }),
+                          success : function(data) {
+                            console.log(data)
+                            if (data == 1) {
+                          	  swalWithBootstrapButtons.fire({
+                                   title: "날짜를 변경하였습니다.",
+                                   type: 'success'
+                               }).then((result) => {
+                                   if (result.value) {
+                                     location.href="library";
+                                     return false;
+                                   }
+                               })
+                           }
+                            }
+                          })
+                    });
             }
               
               function cancel(number){
@@ -222,10 +264,7 @@
                  }
              }
 
-             
-             
              $('#BookRegi').on('click', function() {
-                 
                  var NBkTitle = $("#bookTitle").val();
                  var NBkAuthor = $("#bookAuthor").val();
                  var NBkPrice = $("#bookPrice").val();
@@ -299,7 +338,6 @@
                  },
                  buttonsStyling: false,
                })
-
                
              $(function() {
              $( "#datepicker" ).datepicker({
@@ -324,16 +362,11 @@
              $('#name-clear-btn3').click(function() {
                  $('#datepicker').val('');
                });
-             
              });
              
+
              
-             
-             
-             
-             
-             $('#regi').on('click', function(){ // 읽은 책 목록으로 요청할때.
-            
+             $('#regi').on('click', function(){ // 읽은 책 목록으로 요청할때.            
             var choiceBook = $("#selectBox option:selected").val();
             var inputDate = $("#datepicker").val();
             

@@ -73,11 +73,13 @@
   </delete>
   
   <!-- 읽은 날짜 수정 --> <!-- 책 데이터는 수정할수 없게. -->
-  <update id="update" parameterType="book">
+  <update id="modify" parameterType="mebBook"
+       keyColumn="meb_id" keyProperty="id">
     update MEB_RBOOK
       set
        read_date = #{readDate}
       where
+       meb_id = #{id}
        book_no = #{no}
   </update>
   

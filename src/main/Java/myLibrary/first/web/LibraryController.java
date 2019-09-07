@@ -81,7 +81,7 @@ public class LibraryController {
   @ResponseBody
   public String submit(
       @PathVariable int no, @RequestBody String readDate,
-      HttpSession session) throws ParseException, java.text.ParseException {
+      HttpSession session) throws ParseException {
 
     Member member = (Member) session.getAttribute("loginUser");
     String mId = member.getId();
@@ -102,5 +102,33 @@ public class LibraryController {
     return "1"; 
   }
 
+  
+  // 날짜 수정하기
+  @RequestMapping(value = "modify/{bookNo}", method = {RequestMethod.GET, RequestMethod.POST})
+  @ResponseBody
+  public String modify(
+      @PathVariable int bookNo, @RequestBody String readDate,
+      HttpSession session) throws ParseException {
+
+    System.out.println(bookNo + "//" + readDate);  //읽은 날짜가 안넘어 오네?
+    
+    Member member = (Member) session.getAttribute("loginUser");
+    String mId = member.getId();
+                                                                  // 날짜 파싱해서 Date형태로 DB에 저장.
+    JSONParser jsonParser = new JSONParser();                     // 파서 생성
+    JSONObject jsonObj = (JSONObject) jsonParser.parse(readDate); // 파서가 쓸모없는거({},'') 지워줌
+    String obj = (String) jsonObj.get("readDate");                // 원래 데이터 값(obj에 날짜정보만.)
+    
+    Date parseReadDate = Date.valueOf(obj);                       // Date형태로 변환
+    
+    System.out.println(mId+"//"+ bookNo +"//"+ parseReadDate);
+    
+    bookService.modify(mId, bookNo, parseReadDate);
+
+    return "1"; 
+  }
+  // Date의 형태가 달라서 콘솔창의 오류가 나거나
+  // <form>에 아무런 장치가 안되있는데 먼저 동작해서 오류인건지 확인할것.
+  
   
 }

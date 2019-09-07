@@ -7,5 +7,6 @@ import myLibrary.first.domain.MebBook;
 public interface MebBookDao {
   List<MebBook> readList(String id);
   int insert(MebBook mebBook);
+  int modify(MebBook mebBook);
   int remove(int bookNo); 
 }
