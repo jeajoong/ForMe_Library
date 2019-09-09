@@ -81,7 +81,15 @@ HAVING SUM(sal) > 25000;
    SAL
 -------
    29025
+.... 똑같이 작성해봐도 모든 sal의 합이 나온다 HAVING 절을 사용하지 않아도 똑같다...
+.... 차라리 그냥 WHERE 절로 WHERE SAL > 25000 하는게 더 속편한...
 
-.... 연습용 테이블에 사용해 봤지만 HAVING 쓰든 안쓰든 모든 SALARY의 합이 구해진다...
-.... WHERE 절과 유사하게 동작한다고 적혀있지만....
-.... 책은 HAVING절이 먼저 실행되는거 같은데 나는 SELECT 절이 먼저 실행되는 느낌...
+
+
+-REPLACE : 문자를 변환한다 (정확하게 바꾼다면)
+-TRANSLATE : 문자를 변환한다 (변환하려는 문자와 자리수를 따짐)
+ SELECT TRANSLATE ('AAABBC', 'AB', '1'  ) AS C1  => 111C   / 문자열 자체에 A와 B를 읽어들여 1로 표기, A가 한개 남는거 그냥 1로 표기하는 듯
+      , TRANSLATE ('AAABBC', 'AB', '1 ' ) AS C2  => 111  C / 'A'를 1로 'B'를 ' '으로 변환
+      , TRANSLATE ('AAABBC', 'AB', '123') AS C3  => 11122C / 'AB' 1,2로 대체되는 듯함. 3은 버려짐.
+   FROM DUAL; 
+
