@@ -109,7 +109,7 @@ T_FLR_PURPS_RANK AS        -- 층별 목적 (연면적 -관련)
 T_FLR_STRCT_RANK AS        -- 층별 구조 (연면적 -관련)
    (SELECT BLD_TYPE_GB_CD, MGM_BLD_PK, STRCT_CD,
            SUM(CASE WHEN INSTR(T_AREA,'-') > 0                                             -- -가 포함되어 있을 때.
-           			  THEN TO_NUMBER('-'||SUBSTR(T_AREA,INSTR(T_AREA,'-')+1,LENGTH(T_AREA))) -- T_AREA 문자열에 -를 제외한 숫자부까지를 잘라(SUBSTR), '-'를 붙이고 숫자형으로 바꾼다.
+           	        THEN TO_NUMBER('-'||SUBSTR(T_AREA,INSTR(T_AREA,'-')+1,LENGTH(T_AREA))) -- T_AREA 문자열에 -를 제외한 숫자부까지를 잘라(SUBSTR), '-'를 붙이고 숫자형으로 바꾼다.
                     ELSE TO_NUMBER(T_AREA) END) AS S_T_AREA,                               
            RANK() OVER (PARTITION BY BLD_TYPE_GB_CD, MGM_BLD_PK
                         ORDER BY SUM(CASE WHEN INSTR(T_AREA,'-') > 0
