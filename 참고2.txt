@@ -1,9 +1,9 @@
 /*===============================================================*/
-/*      ÀÏ¹Ý°ÇÃà¹° - ±âº»»çÇ×                                    */
+/*      ì¼ë°˜ê±´ì¶•ë¬¼ - ê¸°ë³¸ì‚¬í•­                                    */
 /*===============================================================*/
 
-/* WITHÀýÀ» »ç¿ëÇØ temp ÀÓ½ÃÅ×ÀÌºíÀ» »ç¿ëÇØ¼­ Àå½Ã°£ °É¸®´Â Äõ¸®ÀÇ °á°ú¸¦ ÀúÀåÇØ³õ°í ÀúÀåÇØ³õÀº µ¥ÀÌÅÍ¸¦ ¿¢¼¼½ºÇÏ±â ¶§¹®¿¡ ¼º´ÉÀÌ ÁÁ´Ù.
-   ÇÏÁö¸¸ WITHÀýÀ» °°Àº ½Ã°£¿¡ ¿©·¯¹ø µ¹¸®¸é temp(ÀÓ½ÃÅ×ÀÌºí)ÀÇ ¿ë·®ÀÌ ³Ñ¾î¼­ ´Ù °°ÀÌ ´À·ÁÁö°Ô µÈ´Ù. */
+/* WITHì ˆì„ ì‚¬ìš©í•´ temp ìž„ì‹œí…Œì´ë¸”ì„ ì‚¬ìš©í•´ì„œ ìž¥ì‹œê°„ ê±¸ë¦¬ëŠ” ì¿¼ë¦¬ì˜ ê²°ê³¼ë¥¼ ì €ìž¥í•´ë†“ê³  ì €ìž¥í•´ë†“ì€ ë°ì´í„°ë¥¼ ì—‘ì„¸ìŠ¤í•˜ê¸° ë•Œë¬¸ì— ì„±ëŠ¥ì´ ì¢‹ë‹¤.
+   í•˜ì§€ë§Œ WITHì ˆì„ ê°™ì€ ì‹œê°„ì— ì—¬ëŸ¬ë²ˆ ëŒë¦¬ë©´ temp(ìž„ì‹œí…Œì´ë¸”)ì˜ ìš©ëŸ‰ì´ ë„˜ì–´ì„œ ë‹¤ ê°™ì´ ëŠë ¤ì§€ê²Œ ëœë‹¤. */
 
 WITH T_TARGET AS
    (SELECT BLD_TYPE_GB_CD, MGM_BLD_PK, MGM_UPPER_BLD_PK
@@ -19,19 +19,19 @@ T_BLDRGST AS
    (SELECT A.BLD_TYPE_GB_CD, A.MGM_BLD_PK,
            A.SIGUNGU_CD||A.BJDONG_CD||'-'||A.PLAT_GB_CD||'-'||A.BUN||A.JI AS MASTR_NO,
            CASE WHEN Z1.SIGUNGU_NM IS NOT NULL THEN Z1.SIDO_NM||' '||Z1.SIGUNGU_NM||' '||Z1.BJDONG_NM ELSE '' END AS BJDONG_ADDR,
-           TRIM(CASE WHEN A.BUN = '0000' THEN                                -- ¹ø(Áö)¿¡ ÇØ´çÇÏ´Â °ªÀÌ 0000ÀÏ¶§
-                         CASE WHEN A.SPLOT_NM IS NOT NULL                    -- Æ¯¼öÁö¸íÀÇ °ªÀÌ ÀÖ´Ù¸é Æ¯¼öÁö¸íÀ» Ãâ·ÂÇÏ°Ô ÇÏ´Â case
+           TRIM(CASE WHEN A.BUN = '0000' THEN                                -- ë²ˆ(ì§€)ì— í•´ë‹¹í•˜ëŠ” ê°’ì´ 0000ì¼ë•Œ
+                         CASE WHEN A.SPLOT_NM IS NOT NULL                    -- íŠ¹ìˆ˜ì§€ëª…ì˜ ê°’ì´ ìžˆë‹¤ë©´ íŠ¹ìˆ˜ì§€ëª…ì„ ì¶œë ¥í•˜ê²Œ í•˜ëŠ” case
                               THEN SPLOT_NM
                               ELSE A.SPLOT_NM ||'-'|| BLOCK END
-                    ELSE CASE WHEN A.PLAT_GB_CD = '0' THEN ''                -- Æ¯¼öÁö¸íÀÇ °ªÀÌ ºñ¾îÀÖ´Ù¸é (Áö¹øÀÌ ÇÊ¼öÀûÀÎ »óÈ²ÀÌ´Ï±î)
-                              WHEN A.PLAT_GB_CD = '1' THEN '»ê'              -- ´ëÁö±¸ºÐÇØÁÖ°í  Áö¹øÀ» Ãâ·ÂÇØ¾ßÇÏ´Âµ¥ Áö¹øÀÇ ¾ÕÂÊ 0À» Á¦°ÅÇÏ±â À§ÇØ
-                              WHEN A.PLAT_GB_CD = '2' THEN 'ºí·°'            -- ¹®ÀÚÇü Áö¹øÀ» ¼ýÀÚÇüÀ¸·Î ¹Ù²ã 0À» Á¦°ÅÈÄ ´Ù½Ã ¹®ÀÚÇüÀ¸·Î ¹Ù²Û´Ù
+                    ELSE CASE WHEN A.PLAT_GB_CD = '0' THEN ''                -- íŠ¹ìˆ˜ì§€ëª…ì˜ ê°’ì´ ë¹„ì–´ìžˆë‹¤ë©´ (ì§€ë²ˆì´ í•„ìˆ˜ì ì¸ ìƒí™©ì´ë‹ˆê¹Œ)
+                              WHEN A.PLAT_GB_CD = '1' THEN 'ì‚°'              -- ëŒ€ì§€êµ¬ë¶„í•´ì£¼ê³   ì§€ë²ˆì„ ì¶œë ¥í•´ì•¼í•˜ëŠ”ë° ì§€ë²ˆì˜ ì•žìª½ 0ì„ ì œê±°í•˜ê¸° ìœ„í•´
+                              WHEN A.PLAT_GB_CD = '2' THEN 'ë¸”ëŸ­'            -- ë¬¸ìží˜• ì§€ë²ˆì„ ìˆ«ìží˜•ìœ¼ë¡œ ë°”ê¿” 0ì„ ì œê±°í›„ ë‹¤ì‹œ ë¬¸ìží˜•ìœ¼ë¡œ ë°”ê¾¼ë‹¤
                               ELSE '' END ||
-                         CASE WHEN LPAD(NVL(A.JI,'0'),4,'0') = '0000' THEN TO_CHAR(TO_NUMBER(A.BUN))  -- JI°¡ nullÀÌ¸é '0000'
+                         CASE WHEN LPAD(NVL(A.JI,'0'),4,'0') = '0000' THEN TO_CHAR(TO_NUMBER(A.BUN))  -- JIê°€ nullì´ë©´ '0000'
                               ELSE TO_CHAR(TO_NUMBER(A.BUN)) ||'-'|| TO_CHAR(TO_NUMBER(A.JI)) END
                     END) AS BUNJI,
            Z2.SIDO_NM||' '||Z2.SIGUNGU_NM||' '||Z2.ROAD_NM||' '||
-           CASE WHEN A.NA_GRND_UGRND_CD = '0' THEN ''                        -- »õÁÖ¼Ò °ü·Ã Áö»óÁöÇÏ ÄÚµåºÐ·ù
+           CASE WHEN A.NA_GRND_UGRND_CD = '0' THEN ''                        -- ìƒˆì£¼ì†Œ ê´€ë ¨ ì§€ìƒì§€í•˜ ì½”ë“œë¶„ë¥˜
                 WHEN A.NA_GRND_UGRND_CD = '1' THEN ''
                 WHEN A.NA_GRND_UGRND_CD = '2' THEN ''
                 ELSE '' END||
@@ -47,8 +47,8 @@ T_BLDRGST AS
            CASE WHEN A.STRCT_CD IS NOT NULL THEN ' ['||A.STRCT_CD||']' ELSE NULL END AS STRCT_NM,
            CASE WHEN Z4.CD_NM IS NOT NULL THEN Z4.CD_NM ELSE NULL END||
            CASE WHEN A.MAIN_PURPS_CD IS NOT NULL THEN ' ['||A.MAIN_PURPS_CD||']' ELSE NULL END AS MAIN_PURPS_NM,
-   --        CASE WHEN A.UGRND_FLR_CNT IS NOT NULL THEN 'ÁöÇÏ; '||A.UGRND_FLR_CNT ||'Ãþ' ELSE NULL END ||', ' ||
-   --        CASE WHEN A.GRND_FLR_CNT IS NOT NULL  THEN 'Áö»ó; '||A.GRND_FLR_CNT ||'Ãþ' ELSE NULL END AS GRND_FLR,
+   --        CASE WHEN A.UGRND_FLR_CNT IS NOT NULL THEN 'ì§€í•˜; '||A.UGRND_FLR_CNT ||'ì¸µ' ELSE NULL END ||', ' ||
+   --        CASE WHEN A.GRND_FLR_CNT IS NOT NULL  THEN 'ì§€ìƒ; '||A.GRND_FLR_CNT ||'ì¸µ' ELSE NULL END AS GRND_FLR,
            A.UGRND_FLR_CNT, A.GRND_FLR_CNT,
            A.BC_RAT, A.VL_RAT, A.HEIT,
            CASE WHEN Z5.CD_NM IS NOT NULL THEN Z5.CD_NM ELSE NULL END||
@@ -70,7 +70,7 @@ T_BLDRGST AS
           (SELECT * FROM CMC_COMM_CD_MGM WHERE LGRP_CD = 'CM004') Z3,
           (SELECT * FROM CMC_COMM_CD_MGM WHERE LGRP_CD = 'CM024') Z4,
           (SELECT * FROM CMC_COMM_CD_MGM WHERE LGRP_CD = 'CM036') Z5
-    WHERE (A.BLD_TYPE_GB_CD, A.MGM_BLD_PK) IN (SELECT BLD_TYPE_GB_CD, MGM_BLD_PK FROM T_TARGET)  -- ºôµùÁ¾·ù±¸ºÐÄÚµå ºôµù PK
+    WHERE (A.BLD_TYPE_GB_CD, A.MGM_BLD_PK) IN (SELECT BLD_TYPE_GB_CD, MGM_BLD_PK FROM T_TARGET)  -- ë¹Œë”©ì¢…ë¥˜êµ¬ë¶„ì½”ë“œ ë¹Œë”© PK
       AND  A.SIGUNGU_CD    = Z1.SIGUNGU_CD(+)
       AND  A.BJDONG_CD     = Z1.BJDONG_CD(+)
       AND  A.NA_ROAD_CD    = Z2.SIGUNGU_CD(+)||Z2.ROAD_NO(+)
@@ -79,21 +79,21 @@ T_BLDRGST AS
       AND  A.ROOF_CD       = Z5.SGRP_CD(+)) ,
 
 
-T_FLR_FORMAT AS            -- Ãþº° Å×ÀÌºí¿¡¼­ ¿ëµµ¿Í ¿¬¸éÀû °ü·Ãµ¥ÀÌÅÍ Çü½ÄÀ»¹Ù²Þ
+T_FLR_FORMAT AS            -- ì¸µë³„ í…Œì´ë¸”ì—ì„œ ìš©ë„ì™€ ì—°ë©´ì  ê´€ë ¨ë°ì´í„° í˜•ì‹ì„ë°”ê¿ˆ
    (SELECT BLD_TYPE_GB_CD, MGM_BLD_PK,
-           SUBSTR(MAIN_PURPS_CD,1,2)||'000' AS MAIN_PURPS_CD, STRCT_CD,                    -- °Ç¹°ÀÇ ¿ëµµ ¾ÕÀÚ¸® µÎ°³¸¦ 000°ú ºÙ¿©¼­ º°Äª
-           LPAD(CASE WHEN INSTR(TO_CHAR(AREA),'.') > 0                                     -- ¿¬¸éÀû¿¡ ¼Ò¼öÁ¡ÀÌ ÀÖ¾î¼­ INSTRÀÌ 0º¸´Ù Å©´Ù¸é
-                     THEN SUBSTR(TO_CHAR(AREA),1,INSTR(TO_CHAR(AREA),'.')-1)               -- ¿¬¸éÀû¿¡¼­ 1ÀÚ¸®¹øÂ°ºÎÅÍ ¼Ò¼öÁ¡ ¹Ù·Î Àü±îÁöÀÇ ¼ýÀÚ¸¦ Àß¶ó³½´Ù. (¼Ò¼öÁ¡À» ¹ö¸°´Ù.?)
-                     ELSE TO_CHAR(AREA) END,9,'0')||'.'||                                  -- ¿¬¸éÀû¿¡ ¼Ò¼öÁ¡ÀÌ ¾ø´Ù¸é ±×´ë·Î Ãâ·Â  =>  9ÀÚ¸®·Î ¸¸µé°í ºñ¾îÀÖ´Â°ªÀº 0À¸·Î Ã¤¿ò
+           SUBSTR(MAIN_PURPS_CD,1,2)||'000' AS MAIN_PURPS_CD, STRCT_CD,                    -- ê±´ë¬¼ì˜ ìš©ë„ ì•žìžë¦¬ ë‘ê°œë¥¼ 000ê³¼ ë¶™ì—¬ì„œ ë³„ì¹­
+           LPAD(CASE WHEN INSTR(TO_CHAR(AREA),'.') > 0                                     -- ì—°ë©´ì ì— ì†Œìˆ˜ì ì´ ìžˆì–´ì„œ INSTRì´ 0ë³´ë‹¤ í¬ë‹¤ë©´
+                     THEN SUBSTR(TO_CHAR(AREA),1,INSTR(TO_CHAR(AREA),'.')-1)               -- ì—°ë©´ì ì—ì„œ 1ìžë¦¬ë²ˆì§¸ë¶€í„° ì†Œìˆ˜ì  ë°”ë¡œ ì „ê¹Œì§€ì˜ ìˆ«ìžë¥¼ ìž˜ë¼ë‚¸ë‹¤. (ì†Œìˆ˜ì ì„ ë²„ë¦°ë‹¤.?)
+                     ELSE TO_CHAR(AREA) END,9,'0')||'.'||                                  -- ì—°ë©´ì ì— ì†Œìˆ˜ì ì´ ì—†ë‹¤ë©´ ê·¸ëŒ€ë¡œ ì¶œë ¥  =>  9ìžë¦¬ë¡œ ë§Œë“¤ê³  ë¹„ì–´ìžˆëŠ”ê°’ì€ 0ìœ¼ë¡œ ì±„ì›€
            RPAD(CASE WHEN INSTR(TO_CHAR(AREA),'.') > 0
-                     THEN SUBSTR(TO_CHAR(AREA),INSTR(TO_CHAR(AREA),'.')+1,LENGTH(AREA))    -- ¿¬¸éÀû¿¡¼­ ¼Ò¼öÁ¡ ÀÌÈÄ ºÎÅÍ Ãâ·ÂÇÏ°í 9ÀÚ¸®¸¦ ¸¸µé¾î ºñ¾îÀÖ´Â °ªÀº 0
-                     ELSE '0' END,9,'0') AS T_AREA                                         --  T_AREA!!!! ex) 000001234.560000000 , 0000-1234.560000000(¸¶ÀÌ³Ê½º °ªÀÌ È¤½Ã³ª ÀÖÀ» ¶§)
+                     THEN SUBSTR(TO_CHAR(AREA),INSTR(TO_CHAR(AREA),'.')+1,LENGTH(AREA))    -- ì—°ë©´ì ì—ì„œ ì†Œìˆ˜ì  ì´í›„ ë¶€í„° ì¶œë ¥í•˜ê³  9ìžë¦¬ë¥¼ ë§Œë“¤ì–´ ë¹„ì–´ìžˆëŠ” ê°’ì€ 0
+                     ELSE '0' END,9,'0') AS T_AREA                                         --  T_AREA!!!! ex) 000001234.560000000 , 0000-1234.560000000(ë§ˆì´ë„ˆìŠ¤ ê°’ì´ í˜¹ì‹œë‚˜ ìžˆì„ ë•Œ)
       FROM BDT_BLD_FLR_OULN
      WHERE(BLD_TYPE_GB_CD, MGM_BLD_PK) IN (SELECT BLD_TYPE_GB_CD, MGM_BLD_PK FROM T_TARGET)
        AND MAIN_ATCH_GB_CD = '0' ),
 
 
-T_FLR_PURPS_RANK AS        -- Ãþº° ¸ñÀû (¿¬¸éÀû -°ü·Ã)
+T_FLR_PURPS_RANK AS        -- ì¸µë³„ ëª©ì  (ì—°ë©´ì  -ê´€ë ¨)
    (SELECT BLD_TYPE_GB_CD, MGM_BLD_PK, MAIN_PURPS_CD,
            SUM(CASE WHEN INSTR(T_AREA,'-') > 0
                        THEN TO_NUMBER('-'||SUBSTR(T_AREA,INSTR(T_AREA,'-')+1,LENGTH(T_AREA)))
@@ -106,10 +106,10 @@ T_FLR_PURPS_RANK AS        -- Ãþº° ¸ñÀû (¿¬¸éÀû -°ü·Ã)
   GROUP BY BLD_TYPE_GB_CD, MGM_BLD_PK, MAIN_PURPS_CD),
 
 
-T_FLR_STRCT_RANK AS        -- Ãþº° ±¸Á¶ (¿¬¸éÀû -°ü·Ã)
+T_FLR_STRCT_RANK AS        -- ì¸µë³„ êµ¬ì¡° (ì—°ë©´ì  -ê´€ë ¨)
    (SELECT BLD_TYPE_GB_CD, MGM_BLD_PK, STRCT_CD,
-           SUM(CASE WHEN INSTR(T_AREA,'-') > 0                                             -- -°¡ Æ÷ÇÔµÇ¾î ÀÖÀ» ¶§.
-           					THEN TO_NUMBER('-'||SUBSTR(T_AREA,INSTR(T_AREA,'-')+1,LENGTH(T_AREA))) -- T_AREA ¹®ÀÚ¿­¿¡ -¸¦ Á¦¿ÜÇÑ ¼ýÀÚºÎ±îÁö¸¦ Àß¶ó(SUBSTR), '-'¸¦ ºÙÀÌ°í ¼ýÀÚÇüÀ¸·Î ¹Ù²Û´Ù.
+           SUM(CASE WHEN INSTR(T_AREA,'-') > 0                                             -- -ê°€ í¬í•¨ë˜ì–´ ìžˆì„ ë•Œ.
+           			  THEN TO_NUMBER('-'||SUBSTR(T_AREA,INSTR(T_AREA,'-')+1,LENGTH(T_AREA))) -- T_AREA ë¬¸ìžì—´ì— -ë¥¼ ì œì™¸í•œ ìˆ«ìžë¶€ê¹Œì§€ë¥¼ ìž˜ë¼(SUBSTR), '-'ë¥¼ ë¶™ì´ê³  ìˆ«ìží˜•ìœ¼ë¡œ ë°”ê¾¼ë‹¤.
                     ELSE TO_NUMBER(T_AREA) END) AS S_T_AREA,                               
            RANK() OVER (PARTITION BY BLD_TYPE_GB_CD, MGM_BLD_PK
                         ORDER BY SUM(CASE WHEN INSTR(T_AREA,'-') > 0
@@ -119,13 +119,13 @@ T_FLR_STRCT_RANK AS        -- Ãþº° ±¸Á¶ (¿¬¸éÀû -°ü·Ã)
   GROUP BY BLD_TYPE_GB_CD, MGM_BLD_PK, STRCT_CD),
 
 
-T_FLR_PURPS AS          -- Ãþº° ¸ñÀû (1¼øÀ§ Ãþº° ¸ñÀû)
+T_FLR_PURPS AS          -- ì¸µë³„ ëª©ì  (1ìˆœìœ„ ì¸µë³„ ëª©ì )
    (SELECT BLD_TYPE_GB_CD, MGM_BLD_PK, MAIN_PURPS_CD AS T_MAIN_PURPS_CD
       FROM T_FLR_PURPS_RANK
      WHERE RANK = 1),
 
 
-T_FLR_STRCT AS          -- Ãþº° ±¸Á¶ (1¼øÀ§ Ãþº° ±¸Á¶)
+T_FLR_STRCT AS          -- ì¸µë³„ êµ¬ì¡° (1ìˆœìœ„ ì¸µë³„ êµ¬ì¡°)
    (SELECT BLD_TYPE_GB_CD, MGM_BLD_PK, STRCT_CD  AS T_STRCT_CD
       FROM T_FLR_STRCT_RANK
      WHERE RANK = 1)
