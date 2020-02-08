@@ -8,7 +8,7 @@
 <header>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-<a href="${contextRootPath}/app/library">
+<a href="${contextRootPath}/first/library">
 <div class="e">
   <h1 class="navbar-brand">도서관리시스템</h1>
 </div>
@@ -121,7 +121,7 @@
       
       <c:if test="${not empty loginUser}">
         ${loginUser.id}
-        <a class="btn btn-dark btn-sm" href='${contextRootPath}/app/auth/logout'>로그아웃</a> 
+        <a class="btn btn-dark btn-sm" href='${contextRootPath}/first/auth/logout'>로그아웃</a> 
       </c:if>
     </div>
   </div>

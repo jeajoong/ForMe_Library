@@ -25,7 +25,7 @@ import myLibrary.first.domain.MebBook;
 import myLibrary.first.domain.Member;
 import myLibrary.first.service.BookService;
 
-@Controller  // http://localhost:8080/myLibrary/app/library
+@Controller  // http://localhost:8080/myLibrary/first/library
 @RequestMapping("/library")
 public class LibraryController {
 

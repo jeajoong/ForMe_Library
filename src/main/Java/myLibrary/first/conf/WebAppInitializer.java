@@ -38,13 +38,13 @@ public class WebAppInitializer
   }
   
   @Override
-  protected String[] getServletMappings() {
-    return new String[] {"/app/*"};
+  protected String[] getServletMappings() { // url 경로에 영향
+    return new String[] {"/first/*"};
   }
   
   @Override
   protected String getServletName() {
-    return "app";
+    return "first";
   }
   
   @Override
