@@ -12,8 +12,11 @@ pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <link href="${contextRootPath}/css/library_interior.css?ver=1" rel="stylesheet"/>
 <link href="${contextRootPath}/node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 <link href="${contextRootPath}/jquery-ui-1.12.1.datepicker2/jquery-ui.css" rel="stylesheet"/> 
+<!-- jquery-ui.css 온전한 파일이 필요할까? 위에껀 detepicker에서 따로 만든게 아닐까? -->
+<link href='${contextRootPath}/lib/fullcalendar_4.3.1/core/main.css' rel='stylesheet' />
+<link href='${contextRootPath}/lib/fullcalendar_4.3.1/daygrid/main.css' rel='stylesheet' />
+<link href='${contextRootPath}/lib/fullcalendar_4.3.1/timegrid/main.css' rel='stylesheet' />
 </head>
-
 <body>
 
 <jsp:include page="../header.jsp"/>
@@ -155,11 +158,21 @@ pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 
 
 </div>
+<!-- jqeury.js / jqeury-ui.js -->
 <script src="${contextRootPath}/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="${contextRootPath}/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
 <script src="${contextRootPath}/jquery-ui-1.12.1.datepicker2/jquery-ui.min.js"></script>
+<!-- bootstrap 관련 js -->
 <script src="${contextRootPath}/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- ajax 처리 관련 popper.min.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<!-- 확인/취소 창 뜨게 해주는 js -->
+<script src="${contextRootPath}/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+
+<!-- fullcalendar 관련 js -->
+<script src='${contextRootPath}/lib/fullcalendar_4.3.1/core/main.js'></script>
+<script src='${contextRootPath}/lib/fullcalendar_4.3.1/interaction/main.js'></script>
+<script src='${contextRootPath}/lib/fullcalendar_4.3.1/daygrid/main.js'></script>
+<script src='${contextRootPath}/lib/fullcalendar_4.3.1/timegrid/main.js'></script>
 <script>
               $(function(){
                   $("dt").click(function(){
