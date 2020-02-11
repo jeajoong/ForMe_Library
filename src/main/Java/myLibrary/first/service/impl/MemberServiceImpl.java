@@ -2,6 +2,7 @@ package myLibrary.first.service.impl;
 
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import myLibrary.first.dao.MemberDao;
@@ -11,6 +12,7 @@ import myLibrary.first.service.MemberService;
 @Service
 public class MemberServiceImpl implements MemberService{
 
+  @Autowired
   MemberDao memberDao;
   
   public MemberServiceImpl(MemberDao memberDao) {

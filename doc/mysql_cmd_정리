@@ -1,0 +1,14 @@
+mysql 접속 :
+	mysql -u root -p (root 대신 사용자명 써도 된는듯.)
+
+사용할 DB 선택
+	(root 계정 비밀번호 바꿀 때는 use mysql;)
+  use DB명;
+
+(root 계정 비밀번호 업데이트 쿼리)
+	update user set password=password('1234') where user='root';
+	만약에 안된다면 이렇게
+  update user set authentication_string=password('1234') where user='root';
+
+  변경내용 commit?효과.
+  flush privileges;

@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -24,12 +22,16 @@ import myLibrary.first.domain.Book;
 import myLibrary.first.domain.MebBook;
 import myLibrary.first.domain.Member;
 import myLibrary.first.service.BookService;
+import myLibrary.first.service.CalendarService;
+import myLibrary.first.service.MemberService;
 
 @Controller  // http://localhost:8080/myLibrary/first/library
 @RequestMapping("/library")
 public class LibraryController {
 
   @Autowired BookService bookService;
+  @Autowired CalendarService calendarService;
+  @Autowired MemberService memberService;
   
   @GetMapping
   public String list(Model model, HttpSession session) {
@@ -129,6 +131,24 @@ public class LibraryController {
   }
   // Date의 형태가 달라서 콘솔창의 오류가 나거나
   // <form>에 아무런 장치가 안되있는데 먼저 동작해서 오류인건지 확인할것.
+
+  /* 달력 테스트 */
+  // http://localhost:8080/myLibrary/first/library?method=init
+  @RequestMapping(params="method=init")
+  public String init() { //이건 jsp 렌더링 때문인것같은데?
+    return "library/fullcalendar";
+  }
   
+  @RequestMapping(params="method=list")
+  public String list(HttpSession session ,Model d) {
+    
+    Member member = (Member)session.getAttribute("loginUser");
+    if(member.getId() == null) {
+      return "로그인필요";
+    } else {
+      d.addAttribute("list", calendarService.list(member.getId()));
+    }
+    return "pageJsonReport";
+  }
   
 }

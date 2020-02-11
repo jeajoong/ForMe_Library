@@ -74,4 +74,15 @@ insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 13, "2017-7-3"
 insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 14, "2017-7-2");
 insert into MEB_RBOOK(meb_id, book_no, read_date) values ('test', 15, "2017-7-1");
 
+insert into calendar(meb_id, id, title, start, end, content, color, textColor, allDay) values(
+'test', 1, '회의', '2019-11-11T09:00:00', '2019-11-11T15:00:00', '내용', '#0099cc', '#ccffff', 0);
+insert into calendar(meb_id, id, title, start, end, content, color, textColor, allDay) values(
+'test', 2, '회의2', '2020-02-11T09:00:00', '2020-02-11T15:00:00', '내용222', '#0099cc', '#ccffff', 0);
+insert into calendar(meb_id, id, title, start, end, content, color, textColor, allDay) values(
+'test', 3, '회의3', '2020-02-12T09:00:00', '2020-02-12T15:00:00', '내용333', '#0099cc', '#ccffff', 0);
+insert into calendar(meb_id, id, title, start, end, content, color, textColor, allDay) values(
+'test', 4, '회의4', '2020-03-11T09:00:00', '2020-03-11T15:00:00', '내용444', '#0099cc', '#ccffff', 0);
+    
+    
+    
 

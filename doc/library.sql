@@ -1,11 +1,3 @@
-/* 으앗 다 까먹었다... cmd로 mysql 접속해서 DB 작업필요할 때.
- db 접속 mysql -u root -p
- 비밀번호 입력 후
- 사용할 DB 선택.
- * */
-
-
-
 
 -- 도서
 DROP TABLE IF EXISTS BOOK RESTRICT;
@@ -17,7 +9,7 @@ DROP TABLE IF EXISTS MEB_RBOOK RESTRICT;
 DROP TABLE IF EXISTS MEMBER RESTRICT;
 
 -- FullCalendar
-DROP TABLE IF EXISTS CAALENDAR RESTRICT;
+DROP TABLE IF EXISTS CALENDAR RESTRICT;
 
 
 -- 도서 테이블 생성
@@ -97,36 +89,30 @@ ALTER TABLE MEB_RBOOK
 		
 		
 -- 달력
-CREATE TABLE CAALENDAR(
-  meb_id  VARCHAR(20) NOT NULL COMMENT '아이디', -- 아이디
-  id         number NOT NULL primary key COMMENT '일정_번호', -- 일정 관련 번호
-  title      varchar2(100)  COMMENT '일정_제목',
-  start     varchar2(50)    COMMENT '일정_시작일',
-  end varchar2(50)         COMMENT '일정_종료일',
-  content varchar2(1000) COMMENT '일정_내용',
-  color varchar2(10)        COMMENT '일정_색상지정_바탕색상',
-  textColor varchar2(10)   COMMENT '일정_색상지정_텍스트색상',
-  allDay number              COMMENT '일정_하루종일_판단'
+CREATE TABLE CALENDAR(
+  meb_id      VARCHAR(20) NOT NULL COMMENT '아이디',
+  id          INTEGER     NOT NULL COMMENT '일정_번호',
+  title       VARCHAR(100)        COMMENT '일정_제목',
+  start       VARCHAR(50)         COMMENT '일정_시작일',
+  end         VARCHAR(50)         COMMENT '일정_종료일',
+  content     VARCHAR(1000)       COMMENT '일정_내용',
+  color       VARCHAR(10)         COMMENT '일정_색상지정_바탕색상',
+  textColor   VARCHAR(10)         COMMENT '일정_색상지정_텍스트색상',
+  allDay      INTEGER              COMMENT '일정_하루종일_판단'
 ) COMMENT '달력';
 
 -- 달력 키 지정
-ALTER TABLE CAALENDAR ADD CONSTRAINT PK_CAALENDAR -- 읽은도서 기본키
+ALTER TABLE CALENDAR ADD CONSTRAINT PK_CALENDAR -- 읽은도서 기본키
     PRIMARY KEY (
       meb_id,   -- 아이디
       id   -- 일정_번호
     );
-    
--- 이거 먹힐지 의문
-CREATE SEQUENCE cal_seq
-    MINVALUE 1
-    MAXVALUE 99999
-    INCREMENT BY 1
-    START WITH 1
-    cache 20;
-    
+
+ALTER TABLE CALENDAR AUTO_INCREMENT = 1;
+
 -- 달력 외래키
-ALTER TABLE CAALENDAR
-  ADD CONSTRAINT FK_MEMBER_TO_CAALENDAR -- 회원 -> 달력
+ALTER TABLE CALENDAR
+  ADD CONSTRAINT FK_MEMBER_TO_CALENDAR -- 회원 -> 달력
     FOREIGN KEY (
       meb_id -- 아이디
     )

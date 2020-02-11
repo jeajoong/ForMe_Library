@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myLibrary.first.dao.CalendarDao">
+	<resultMap type="calendar" id="calResult">
+    <id column="meb_id"        property="userId"/> <!-- property명과 column명이 다른경우 mapping 처리해야한다. -->
+    <id column="id"            property="id"/>     <!-- 같은 경우에 생략하면 나중에 유지보수할 때 어려워지지 않을까? -->
+    <result column="title"     property="title"/>
+    <result column="start"     property="start"/>
+    <result column="end"       property="end"/>
+    <result column="content"   property="content"/>
+    <result column="color"     property="color"/>
+    <result column="textColor" property="textColor"/>
+    <result column="allDay"    property="allDay"/>
+	</resultMap>
+  
+	<select id="list" resultMap="calResult" parameterType="java.lang.String" >
+		SELECT * FROM CALENDAR WHERE meb_id = #{userId}
+	</select>
+
+	<insert id="insertCalendar" parameterType="calendar">
+		insert into calendar(meb_id, title, start, end, content, color, textColor, allDay)
+                values(#{userId},#{title}, #{start}, #{end}, #{content}, #{color},#{textColor}, #{allDay})
+	</insert>
+  
+	<update id="updateCalendar"  parameterType="calendar">
+		UPDATE calendar
+			SET title     = #{title},
+			    start     = #{start},
+			    end       = #{end},
+			    content   = #{content},
+			    color     = #{color},
+			    textcolor = #{textColor},
+			    allday    = #{allDay}
+		   WHERE meb_id = #{userId}
+         AND id     = #{id}
+	</update>
+  
+	<delete id="deleteCalendar" parameterType="java.util.Map">
+		DELETE FROM CALENDAR
+		WHERE meb_id = #{userId}
+      AND id = #{id}
+	</delete>
+
+</mapper>	
+
+
+
